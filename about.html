@@ -1,14 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=404.html">
-  <title>About Stackly</title>
-  <script>
-    window.location.replace("404.html");
-  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Learn about Stackly — 15+ years of premium construction excellence in residential, commercial, and industrial projects across Tamil Nadu.">
+  <title>About Us | Stackly Construction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <p>Redirecting to <a href="404.html">404 Page</a>...</p>
+
+  <div class="loader-wrapper" id="loader">
+    <div class="loader-container">
+      <div class="loader-ring" aria-hidden="true"></div>
+      <div class="loader-glow" aria-hidden="true"></div>
+      <svg class="loader-logo" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="loader-yellow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FFF066" />
+            <stop offset="100%" stop-color="#FFD600" />
+          </linearGradient>
+        </defs>
+        <g fill="url(#loader-yellow)">
+          <path
+            d="M 64,2 C 60,15 48,32 32,48 C 14,66 6,84 20,102 C 30,115 56,114 56,98 C 56,90 44,88 35,82 C 26,76 30,62 38,52 C 46,42 62,25 64,2 Z" />
+          <path
+            d="M 64,2 C 60,15 48,32 32,48 C 14,66 6,84 20,102 C 30,115 56,114 56,98 C 56,90 44,88 35,82 C 26,76 30,62 38,52 C 46,42 62,25 64,2 Z"
+            transform="rotate(180, 50, 80)" />
+        </g>
+      </svg>
+    </div>
+  </div>
+  <script>document.body.classList.add('menu-open');</script>
+
+  <header class="header scrolled" id="header" role="banner">
+    <div class="container nav-container">
+      <a href="index.html" class="logo" aria-label="Stackly Homepage">
+        <img src="assets/stackly-logo.webp" alt="Stackly" class="logo-img" width="220" height="54">
+      </a>
+      <nav class="nav-menu" role="navigation" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link active">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="contact.html" class="btn btn-primary">Get Quote</a>
+        <button class="nav-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu"
+          aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-overlay" id="mobile-menu" aria-hidden="true" role="dialog">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="projects.html" class="nav-link">Projects</a>
+    <a href="blog.html" class="nav-link">Blog</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="contact.html" class="btn btn-primary">Get Quote</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="page-hero-bg page-hero-about" aria-hidden="true"></div>
+    <div class="page-hero-overlay" aria-hidden="true"></div>
+    <div class="container">
+      <div class="page-hero-breadcrumb reveal">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <span>About</span>
+      </div>
+      <h1 class="page-hero-title reveal">About Stackly</h1>
+      <p class="page-hero-desc reveal">
+        A Salem-born construction company with a single promise — deliver every project with precision, transparency,
+        and craftsmanship that lasts generations.
+      </p>
+    </div>
+  </section>
+
+  <section class="about-story-section section-padding">
+    <div class="container">
+      <div class="about-image-grid reveal-left">
+        <img src="assets/hero-slide-1.webp" alt="Luxury residential tower under construction" loading="lazy">
+        <img src="assets/hero-slide-4.webp" alt="Modern commercial building exterior" loading="lazy">
+        <img src="assets/hero-slide-5.webp" alt="Premium villa with landscaped garden" loading="lazy">
+      </div>
+      <div class="about-story-content reveal-right">
+        <span class="section-subtitle">Our Story</span>
+        <h2>Built on Trust, Driven by Precision</h2>
+        <p>
+          Stackly started in 2011 when three civil engineers in Salem decided that local construction deserved
+          world-class standards. What began as a boutique residential firm has evolved into a full-scale builder
+          trusted across Tamil Nadu for complex commercial and industrial work.
+        </p>
+        <p>
+          We don't chase volume — we chase quality. Every site manager, architect, and subcontractor on our roster
+          is vetted for skill, safety compliance, and accountability before stepping on your property.
+        </p>
+        <div class="about-story-highlights">
+          <div class="about-story-highlight">
+            <div class="about-story-highlight-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <strong>ISO 9001 Certified Processes</strong>
+              <span>Documented quality checks at every construction phase — from foundation to final handover.</span>
+            </div>
+          </div>
+          <div class="about-story-highlight">
+            <div class="about-story-highlight-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <strong>Fixed Project Timelines</strong>
+              <span>Milestone-based scheduling with weekly progress reports so you always know where things stand.</span>
+            </div>
+          </div>
+          <div class="about-story-highlight">
+            <div class="about-story-highlight-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div>
+              <strong>Dedicated Project Manager</strong>
+              <span>One point of contact from kickoff to keys — no runaround, no miscommunication.</span>
+            </div>
+          </div>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Schedule a Site Visit</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding" style="background: var(--bg-surface); border-top: 1px solid var(--border-glass);">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-subtitle">Our Purpose</span>
+        <h2 class="section-title">Mission, Vision & Values</h2>
+        <p class="section-desc">The principles that guide every blueprint, every build site, and every partnership we form.</p>
+      </div>
+      <div class="mission-grid">
+        <div class="mission-card reveal">
+          <div class="mission-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+          </div>
+          <h3>Our Mission</h3>
+          <p>To deliver world-class construction solutions that exceed client expectations through innovation, integrity, and an unwavering commitment to safety and sustainability.</p>
+        </div>
+        <div class="mission-card reveal delay-100">
+          <div class="mission-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </div>
+          <h3>Our Vision</h3>
+          <p>To be the most trusted construction partner in South India — recognized for landmark projects that shape skylines and communities for generations.</p>
+        </div>
+        <div class="mission-card reveal delay-200">
+          <div class="mission-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+          </div>
+          <h3>Our Values</h3>
+          <p>Quality craftsmanship, transparent communication, environmental responsibility, and treating every worker and client with the respect they deserve.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-journey-section section-padding">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-subtitle">Our Journey</span>
+        <h2 class="section-title">Milestones That Shaped Stackly</h2>
+        <p class="section-desc">Key moments in our growth from a local builder to a regional construction leader.</p>
+      </div>
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2011</div>
+          <h3>Founded in Salem</h3>
+          <p>Three civil engineers launch Stackly with a focus on premium villa and apartment construction in Tamil Nadu.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2016</div>
+          <h3>Commercial Division Launched</h3>
+          <p>Expanded into office towers and retail plazas — our first LEED Gold-certified building opens in Coimbatore.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2021</div>
+          <h3>Industrial & Infrastructure</h3>
+          <p>Added warehouses, processing plants, and logistics hubs to our portfolio — serving manufacturing clients statewide.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2026</div>
+          <h3>500+ Landmarks & Counting</h3>
+          <p>150+ team members, operations across 4 cities, and a 98% client retention rate — still headquartered in Salem.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding" style="background: var(--bg-surface); border-top: 1px solid var(--border-glass);">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-subtitle">Leadership</span>
+        <h2 class="section-title">Meet the People Behind Stackly</h2>
+        <p class="section-desc">Experienced professionals who lead every project with hands-on oversight and accountability.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card reveal">
+          <div class="team-avatar" aria-hidden="true">RK</div>
+          <h3>Rajesh Kumar</h3>
+          <div class="team-role">Managing Director</div>
+          <p>25 years in structural engineering. Leads company strategy and major commercial project approvals.</p>
+        </div>
+        <div class="team-card reveal delay-100">
+          <div class="team-avatar" aria-hidden="true">PM</div>
+          <h3>Priya Menon</h3>
+          <div class="team-role">Head of Architecture</div>
+          <p>LEED-accredited architect specializing in sustainable design and smart building integration.</p>
+        </div>
+        <div class="team-card reveal delay-200">
+          <div class="team-avatar" aria-hidden="true">AS</div>
+          <h3>Arun Selvam</h3>
+          <div class="team-role">Operations Director</div>
+          <p>Oversees all active sites, safety compliance, and subcontractor coordination across Tamil Nadu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-subtitle">Standards</span>
+        <h2 class="section-title">Certifications & Accreditations</h2>
+        <p class="section-desc">Industry-recognized credentials that back our commitment to quality and safety.</p>
+      </div>
+      <div class="cert-grid">
+        <div class="cert-card reveal">
+          <div class="cert-card-icon">ISO</div>
+          <h4>ISO 9001:2015</h4>
+          <p>Quality management systems for consistent project delivery.</p>
+        </div>
+        <div class="cert-card reveal delay-100">
+          <div class="cert-card-icon">LEED</div>
+          <h4>LEED Accredited</h4>
+          <p>Green building design and sustainable construction practices.</p>
+        </div>
+        <div class="cert-card reveal delay-200">
+          <div class="cert-card-icon">BIM</div>
+          <h4>BIM Level 2</h4>
+          <p>Building Information Modeling for precision planning.</p>
+        </div>
+        <div class="cert-card reveal delay-300">
+          <div class="cert-card-icon">OSHA</div>
+          <h4>OSHA Compliant</h4>
+          <p>Zero-compromise safety standards on every active site.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section cta-section-about">
+    <div class="cta-bg">
+      <img src="assets/about-bg.webp" alt="Construction team reviewing architectural plans on site" loading="lazy">
+    </div>
+    <div class="cta-overlay"></div>
+    <div class="container">
+      <h2 class="cta-title">Let's Build Something Lasting</h2>
+      <p class="cta-desc">Tell us about your vision — our team will respond with a detailed proposal within 48 hours.</p>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-primary">Request a Proposal</a>
+        <a href="services.html" class="btn btn-secondary">Explore Our Services</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="logo" aria-label="Stackly Homepage">
+            <img src="assets/stackly-logo.webp" alt="Stackly" class="logo-img" width="220" height="54">
+          </a>
+          <p class="footer-about-text">Stackly is an industry leader in premium architectural designs, engineering, and sustainable development.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-icon" aria-label="Facebook"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg></a>
+            <a href="#" class="social-icon" aria-label="LinkedIn"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+            <a href="#" class="social-icon" aria-label="Instagram"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="blog.html">News & Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="services.html">Residential</a></li>
+            <li><a href="services.html">Commercial</a></li>
+            <li><a href="services.html">Industrial</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Get Quote</a></li>
+            <li><a href="index.html">Home</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="footer-contact-info"><p>+91 1234567890</p></div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="footer-contact-info"><p>info@stackly.com</p></div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="footer-contact-info"><p>Salem, Tamil Nadu - 636005</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">&copy; <span id="current-year">2026</span> Stackly. All rights reserved.</div>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="custom-cursor-dot" id="custom-cursor-dot" aria-hidden="true"></div>
+  <div class="custom-cursor-outline" id="custom-cursor-outline" aria-hidden="true"></div>
+  <script src="script.js"></script>
 </body>
 </html>

@@ -9,6 +9,29 @@
 </head>
 <body class="page-404">
 
+  <div class="loader-wrapper" id="loader">
+    <div class="loader-container">
+      <div class="loader-ring" aria-hidden="true"></div>
+      <div class="loader-glow" aria-hidden="true"></div>
+      <svg class="loader-logo" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="loader-yellow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FFF066" />
+            <stop offset="100%" stop-color="#FFD600" />
+          </linearGradient>
+        </defs>
+        <g fill="url(#loader-yellow)">
+          <path
+            d="M 64,2 C 60,15 48,32 32,48 C 14,66 6,84 20,102 C 30,115 56,114 56,98 C 56,90 44,88 35,82 C 26,76 30,62 38,52 C 46,42 62,25 64,2 Z" />
+          <path
+            d="M 64,2 C 60,15 48,32 32,48 C 14,66 6,84 20,102 C 30,115 56,114 56,98 C 56,90 44,88 35,82 C 26,76 30,62 38,52 C 46,42 62,25 64,2 Z"
+            transform="rotate(180, 50, 80)" />
+        </g>
+      </svg>
+    </div>
+  </div>
+  <script>document.body.classList.add('menu-open');</script>
+
   <div class="error-container">
     <!-- Branding logo top -->
     <a href="index.html" class="logo error-logo" aria-label="Stackly Homepage">
@@ -87,67 +110,6 @@
   <div class="custom-cursor-dot" id="custom-cursor-dot" aria-hidden="true"></div>
   <div class="custom-cursor-outline" id="custom-cursor-outline" aria-hidden="true"></div>
 
-  <!-- Inline Cursor Script for 404 page -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const cursorDot = document.getElementById('custom-cursor-dot');
-      const cursorOutline = document.getElementById('custom-cursor-outline');
-
-      if (cursorDot && cursorOutline) {
-        let mouseX = 0;
-        let mouseY = 0;
-        let outlineX = 0;
-        let outlineY = 0;
-        let isCursorVisible = false;
-
-        window.addEventListener('mousemove', (e) => {
-          mouseX = e.clientX;
-          mouseY = e.clientY;
-
-          if (!isCursorVisible) {
-            cursorDot.style.opacity = '1';
-            cursorOutline.style.opacity = '1';
-            isCursorVisible = true;
-          }
-
-          cursorDot.style.left = mouseX + 'px';
-          cursorDot.style.top = mouseY + 'px';
-        });
-
-        const animateCursor = () => {
-          const ease = 0.15;
-          outlineX += (mouseX - outlineX) * ease;
-          outlineY += (mouseY - outlineY) * ease;
-
-          cursorOutline.style.left = outlineX + 'px';
-          cursorOutline.style.top = outlineY + 'px';
-
-          requestAnimationFrame(animateCursor);
-        };
-        requestAnimationFrame(animateCursor);
-
-        const interactives = document.querySelectorAll('a, button, input, textarea');
-        const handleMouseEnter = () => document.body.classList.add('cursor-hover');
-        const handleMouseLeave = () => document.body.classList.remove('cursor-hover');
-
-        interactives.forEach(el => {
-          el.addEventListener('mouseenter', handleMouseEnter);
-          el.addEventListener('mouseleave', handleMouseLeave);
-        });
-
-        document.addEventListener('mouseleave', () => {
-          cursorDot.style.opacity = '0';
-          cursorOutline.style.opacity = '0';
-          isCursorVisible = false;
-        });
-
-        document.addEventListener('mouseenter', () => {
-          cursorDot.style.opacity = '1';
-          cursorOutline.style.opacity = '1';
-          isCursorVisible = true;
-        });
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

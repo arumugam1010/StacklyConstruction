@@ -1,14 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=404.html">
-  <title>Stackly Blog</title>
-  <script>
-    window.location.replace("404.html");
-  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Read the latest construction industry news, project updates, and building tips from the Stackly team.">
+  <title>Blog & News | Stackly Construction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <p>Redirecting to <a href="404.html">404 Page</a>...</p>
+
+  <div class="loader-wrapper" id="loader">
+    <div class="loader-container">
+      <div class="loader-ring" aria-hidden="true"></div>
+      <div class="loader-glow" aria-hidden="true"></div>
+      <svg class="loader-logo" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="loader-yellow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FFF066" />
+            <stop offset="100%" stop-color="#FFD600" />
+          </linearGradient>
+        </defs>
+        <g fill="url(#loader-yellow)">
+          <path
+            d="M 64,2 C 60,15 48,32 32,48 C 14,66 6,84 20,102 C 30,115 56,114 56,98 C 56,90 44,88 35,82 C 26,76 30,62 38,52 C 46,42 62,25 64,2 Z" />
+          <path
+            d="M 64,2 C 60,15 48,32 32,48 C 14,66 6,84 20,102 C 30,115 56,114 56,98 C 56,90 44,88 35,82 C 26,76 30,62 38,52 C 46,42 62,25 64,2 Z"
+            transform="rotate(180, 50, 80)" />
+        </g>
+      </svg>
+    </div>
+  </div>
+  <script>document.body.classList.add('menu-open');</script>
+
+  <header class="header scrolled" id="header" role="banner">
+    <div class="container nav-container">
+      <a href="index.html" class="logo" aria-label="Stackly Homepage">
+        <img src="assets/stackly-logo.webp" alt="Stackly" class="logo-img" width="220" height="54">
+      </a>
+      <nav class="nav-menu" role="navigation" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="blog.html" class="nav-link active">Blog</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="contact.html" class="btn btn-primary">Get Quote</a>
+        <button class="nav-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu"
+          aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-overlay" id="mobile-menu" aria-hidden="true" role="dialog">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="projects.html" class="nav-link">Projects</a>
+    <a href="blog.html" class="nav-link">Blog</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="contact.html" class="btn btn-primary">Get Quote</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="page-hero-bg page-hero-blog" aria-hidden="true"></div>
+    <div class="page-hero-overlay" aria-hidden="true"></div>
+    <div class="container">
+      <div class="page-hero-breadcrumb reveal">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <span>Blog</span>
+      </div>
+      <h1 class="page-hero-title reveal">News & Insights</h1>
+      <p class="page-hero-desc reveal">
+        Stay updated with the latest trends in construction, project milestones, sustainability practices, and industry expertise from our team.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-padding">
+    <div class="container">
+      <article class="blog-featured reveal">
+        <img class="blog-featured-img" src="assets/project-1.webp" alt="Sustainable building practices" loading="lazy">
+        <div class="blog-featured-content">
+          <div class="blog-meta">
+            <span class="blog-tag">Featured</span>
+            <span>May 28, 2026</span>
+          </div>
+          <h2>The Future of Sustainable Construction in Tamil Nadu</h2>
+          <p style="color: var(--text-secondary); font-size: 15px; line-height: 1.6; margin-bottom: 24px;">
+            How Stackly is leading the shift toward LEED-certified green buildings, solar-integrated rooftops, and carbon-neutral construction methods across South India.
+          </p>
+          <a href="#" class="blog-read-more">Read Full Article <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </article>
+
+      <div class="blog-grid">
+        <article class="blog-card reveal">
+          <img class="blog-card-img" src="assets/project-4.webp" alt="Smart office buildings" loading="lazy">
+          <div class="blog-card-body">
+            <div class="blog-meta">
+              <span class="blog-tag">Commercial</span>
+              <span>May 15, 2026</span>
+            </div>
+            <h3>5 Trends Shaping Smart Office Buildings in 2026</h3>
+            <p>From IoT-integrated HVAC systems to adaptive glass facades — discover what defines the next generation of corporate workspaces.</p>
+            <a href="#" class="blog-read-more">Read More <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </article>
+        <article class="blog-card reveal delay-100">
+          <img class="blog-card-img" src="assets/service-residential.webp" alt="Home construction tips" loading="lazy">
+          <div class="blog-card-body">
+            <div class="blog-meta">
+              <span class="blog-tag">Residential</span>
+              <span>May 2, 2026</span>
+            </div>
+            <h3>How to Choose the Right Builder for Your Dream Home</h3>
+            <p>Essential questions to ask before signing a construction contract — licensing, timelines, materials, and warranty coverage.</p>
+            <a href="#" class="blog-read-more">Read More <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </article>
+        <article class="blog-card reveal delay-200">
+          <img class="blog-card-img" src="assets/service-industrial.webp" alt="Industrial safety" loading="lazy">
+          <div class="blog-card-body">
+            <div class="blog-meta">
+              <span class="blog-tag">Safety</span>
+              <span>Apr 20, 2026</span>
+            </div>
+            <h3>Zero-Incident Sites: Our Safety Protocol Explained</h3>
+            <p>A deep dive into the daily safety audits, PPE standards, and training programs that keep our industrial projects incident-free.</p>
+            <a href="#" class="blog-read-more">Read More <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </article>
+        <article class="blog-card reveal">
+          <img class="blog-card-img" src="assets/hero-slide-3.webp" alt="BIM technology" loading="lazy">
+          <div class="blog-card-body">
+            <div class="blog-meta">
+              <span class="blog-tag">Technology</span>
+              <span>Apr 8, 2026</span>
+            </div>
+            <h3>Why BIM Modeling Saves Time and Money on Large Projects</h3>
+            <p>Building Information Modeling reduces rework by 30% — here's how Stackly uses BIM from design through commissioning.</p>
+            <a href="#" class="blog-read-more">Read More <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </article>
+        <article class="blog-card reveal delay-100">
+          <img class="blog-card-img" src="assets/project-2.webp" alt="Retail construction" loading="lazy">
+          <div class="blog-card-body">
+            <div class="blog-meta">
+              <span class="blog-tag">Commercial</span>
+              <span>Mar 25, 2026</span>
+            </div>
+            <h3>Inside the Omnia Retail Complex: A Build Story</h3>
+            <p>From groundbreaking to grand opening — a behind-the-scenes look at one of our most ambitious commercial projects.</p>
+            <a href="#" class="blog-read-more">Read More <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </article>
+        <article class="blog-card reveal delay-200">
+          <img class="blog-card-img" src="assets/story-video-house.webp" alt="Green building materials" loading="lazy">
+          <div class="blog-card-body">
+            <div class="blog-meta">
+              <span class="blog-tag">Sustainability</span>
+              <span>Mar 10, 2026</span>
+            </div>
+            <h3>Top Eco-Friendly Building Materials for 2026</h3>
+            <p>Recycled steel, low-VOC paints, and fly-ash bricks — the materials Stackly recommends for greener construction.</p>
+            <a href="#" class="blog-read-more">Read More <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="cta-bg">
+      <img src="assets/story-video-house.webp" alt="Modern residential home with green sustainable design" loading="lazy">
+    </div>
+    <div class="cta-overlay"></div>
+    <div class="container">
+      <h2 class="cta-title">Stay in the Loop</h2>
+      <p class="cta-desc">Contact us to receive project updates and industry insights directly from the Stackly team.</p>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-primary">Subscribe via Contact</a>
+        <a href="projects.html" class="btn btn-secondary">View Projects</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="logo" aria-label="Stackly Homepage">
+            <img src="assets/stackly-logo.webp" alt="Stackly" class="logo-img" width="220" height="54">
+          </a>
+          <p class="footer-about-text">Stackly is an industry leader in premium architectural designs, engineering, and sustainable development.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="blog.html">News & Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="services.html">Residential</a></li>
+            <li><a href="services.html">Commercial</a></li>
+            <li><a href="services.html">Industrial</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Get Quote</a></li>
+            <li><a href="index.html">Home</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="footer-contact-info"><p>+91 1234567890</p></div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="footer-contact-info"><p>info@stackly.com</p></div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="footer-contact-info"><p>Salem, Tamil Nadu - 636005</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">&copy; <span id="current-year">2026</span> Stackly. All rights reserved.</div>
+        <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="custom-cursor-dot" id="custom-cursor-dot" aria-hidden="true"></div>
+  <div class="custom-cursor-outline" id="custom-cursor-outline" aria-hidden="true"></div>
+  <script src="script.js"></script>
 </body>
 </html>
