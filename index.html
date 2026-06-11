@@ -1,0 +1,1190 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Stackly is a premium, modern construction company delivering world-class residential, commercial, and industrial landmarks with certified safety standards.">
+  <meta name="keywords"
+    content="Stackly, Construction Company, Corporate Construction, Premium Builders, Architecture, Project Management">
+  <meta name="author" content="Stackly">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Stackly | Building Tomorrow's Landmarks Today">
+  <meta property="og:description"
+    content="Premium corporate construction solutions for residential, commercial, and industrial projects.">
+  <meta property="og:type" content="website">
+  <meta property="og:image"
+    content="assets/og-image.webp">
+
+  <title>Stackly | Building Tomorrow's Landmarks Today</title>
+
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ====================================
+       LOADER SCREEN
+       ==================================== -->
+  <div class="loader-wrapper" id="loader">
+    <div class="loader-container">
+      <div class="loader-ring" aria-hidden="true"></div>
+      <div class="loader-glow" aria-hidden="true"></div>
+      <!-- Modern Flame S Logo for Loader -->
+      <svg class="loader-logo" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="loader-yellow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FFF066" />
+            <stop offset="100%" stop-color="#FFD600" />
+          </linearGradient>
+        </defs>
+        <g fill="url(#loader-yellow)">
+          <path
+            d="M 64,2 C 60,15 48,32 32,48 C 14,66 6,84 20,102 C 30,115 56,114 56,98 C 56,90 44,88 35,82 C 26,76 30,62 38,52 C 46,42 62,25 64,2 Z" />
+          <path
+            d="M 64,2 C 60,15 48,32 32,48 C 14,66 6,84 20,102 C 30,115 56,114 56,98 C 56,90 44,88 35,82 C 26,76 30,62 38,52 C 46,42 62,25 64,2 Z"
+            transform="rotate(180, 50, 80)" />
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ====================================
+       STICKY HEADER / NAVBAR
+       ==================================== -->
+  <header class="header" id="header" role="banner">
+    <div class="container nav-container">
+      <!-- Logo -->
+      <a href="#home" class="logo" aria-label="Stackly Homepage">
+        <img src="assets/stackly-logo.webp" alt="Stackly" class="logo-img" width="220" height="54">
+      </a>
+
+      <!-- Center Menu -->
+      <nav class="nav-menu" role="navigation" aria-label="Main Navigation">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Right Action Button -->
+      <div class="nav-actions">
+        <a href="404.html" class="btn btn-primary" id="quote-btn">Get Quote</a>
+        <!-- Mobile Toggle Button -->
+        <button class="nav-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu"
+          aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="nav-overlay" id="mobile-menu" aria-hidden="true" role="dialog">
+    <a href="#home" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="projects.html" class="nav-link">Projects</a>
+    <a href="blog.html" class="nav-link">Blog</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="404.html" class="btn btn-primary">Get Quote</a>
+  </div>
+
+  <!-- ====================================
+       HERO SECTION
+       ==================================== -->
+  <section class="hero" id="home">
+    <!-- Animated background slideshow (5 WebP images of Luxury Buildings & Houses) -->
+    <div class="hero-slideshow" aria-hidden="true">
+      <div class="hero-slide"
+        style="background-image: url('assets/hero-slide-1.webp');">
+      </div>
+      <div class="hero-slide"
+        style="background-image: url('assets/hero-slide-2.webp');">
+      </div>
+      <div class="hero-slide"
+        style="background-image: url('assets/hero-slide-3.webp');">
+      </div>
+      <div class="hero-slide"
+        style="background-image: url('assets/hero-slide-4.webp');">
+      </div>
+      <div class="hero-slide"
+        style="background-image: url('assets/hero-slide-5.webp');">
+      </div>
+    </div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-glow-1" aria-hidden="true"></div>
+    <div class="hero-glow-2" aria-hidden="true"></div>
+    <div class="container">
+      <!-- Left Content -->
+      <div class="hero-content reveal">
+        <div class="badge">Trusted Construction Experts</div>
+        <h1 class="hero-title">
+          <span>Building Tomorrow’s</span>
+          <span class="text-yellow">Landmarks Today</span>
+        </h1>
+        <p class="hero-desc">
+          Professional construction solutions for residential, commercial, and industrial projects. Combining
+          engineering excellence with safety and sustainable design.
+        </p>
+        <div class="hero-actions">
+          <a href="404.html" class="btn btn-primary">Get Started</a>
+          <a href="#projects" class="btn btn-secondary">View Projects</a>
+        </div>
+      </div>
+
+      <!-- Right Visuals & Floating Cards -->
+      <div class="hero-visual reveal-right">
+        <!-- Floating Card 1: Experience -->
+        <div class="stat-card stat-card-1">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg>
+          </div>
+          <div class="stat-info">
+            <div class="stat-num">15+</div>
+            <div class="stat-lbl">Years Experience</div>
+          </div>
+        </div>
+
+        <!-- Floating Card 2: Projects -->
+        <div class="stat-card stat-card-2">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+            </svg>
+          </div>
+          <div class="stat-info">
+            <div class="stat-num">500+</div>
+            <div class="stat-lbl">Completed Projects</div>
+          </div>
+        </div>
+
+        <!-- Floating Card 3: Engineers -->
+        <div class="stat-card stat-card-3">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </div>
+          <div class="stat-info">
+            <div class="stat-num">120+</div>
+            <div class="stat-lbl">Expert Engineers</div>
+          </div>
+        </div>
+
+        <!-- Floating Card 4: Satisfaction -->
+        <div class="stat-card stat-card-4">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
+            </svg>
+          </div>
+          <div class="stat-info">
+            <div class="stat-num">98%</div>
+            <div class="stat-lbl">Client Satisfaction</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================
+       TRUSTED BRANDS SECTION
+       ==================================== -->
+  <section class="trusted-brands" aria-label="Our Trusted Partners">
+    <div class="brands-slider">
+      <div class="brands-track">
+        <!-- Logo 1: Apex -->
+        <div class="brand-item">
+          <svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="apex-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FF5252" />
+                <stop offset="100%" stop-color="#FFD740" />
+              </linearGradient>
+            </defs>
+            <path d="M 50,10 L 90,85 L 70,85 L 50,45 L 30,85 L 10,85 Z" fill="url(#apex-grad)" />
+            <path d="M 50,30 L 62,60 L 38,60 Z" fill="#FFFFFF" opacity="0.9" />
+          </svg>
+          <span class="brand-name">Apex</span>
+        </div>
+        <!-- Logo 2: BuildCorp -->
+        <div class="brand-item">
+          <svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="build-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00E5FF" />
+                <stop offset="100%" stop-color="#2979FF" />
+              </linearGradient>
+            </defs>
+            <rect x="15" y="15" width="30" height="30" rx="4" fill="url(#build-grad)" />
+            <rect x="55" y="15" width="30" height="30" rx="4" fill="url(#build-grad)" opacity="0.8" />
+            <rect x="15" y="55" width="70" height="30" rx="4" fill="url(#build-grad)" />
+          </svg>
+          <span class="brand-name">BuildCorp</span>
+        </div>
+        <!-- Logo 3: Structura -->
+        <div class="brand-item">
+          <svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="struct-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#00E676" />
+                <stop offset="100%" stop-color="#B9F6CA" />
+              </linearGradient>
+            </defs>
+            <polygon points="50,10 85,30 85,70 50,90 15,70 15,30" fill="none" stroke="url(#struct-grad)" stroke-width="8" stroke-linejoin="round" />
+            <line x1="50" y1="10" x2="50" y2="90" stroke="url(#struct-grad)" stroke-width="4" />
+            <line x1="15" y1="30" x2="85" y2="70" stroke="url(#struct-grad)" stroke-width="4" />
+            <line x1="15" y1="70" x2="85" y2="30" stroke="url(#struct-grad)" stroke-width="4" />
+          </svg>
+          <span class="brand-name">Structura</span>
+        </div>
+        <!-- Logo 4: Nova -->
+        <div class="brand-item">
+          <svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="nova-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FF4081" />
+                <stop offset="100%" stop-color="#651FFF" />
+              </linearGradient>
+            </defs>
+            <path d="M 50,10 L 58,38 L 86,38 L 64,55 L 72,83 L 50,66 L 28,83 L 36,55 L 14,38 L 42,38 Z" fill="url(#nova-grad)" />
+            <circle cx="50" cy="48" r="12" fill="#FFFFFF" opacity="0.3" />
+          </svg>
+          <span class="brand-name">Nova</span>
+        </div>
+        <!-- Logo 5: Vertex -->
+        <div class="brand-item">
+          <svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="vertex-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#FFD600" />
+                <stop offset="100%" stop-color="#FF6D00" />
+              </linearGradient>
+            </defs>
+            <path d="M 50,15 L 85,50 L 70,65 L 50,45 L 30,65 L 15,50 Z" fill="url(#vertex-grad)" />
+            <path d="M 50,40 L 85,75 L 70,90 L 50,70 L 30,90 L 15,75 Z" fill="url(#vertex-grad)" opacity="0.75" />
+          </svg>
+          <span class="brand-name">Vertex</span>
+        </div>
+
+        <!-- Duplicate Set for Continuous Sliding Marquee -->
+        <!-- Logo 1: Apex -->
+        <div class="brand-item">
+          <svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="apex-grad-dup" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FF5252" />
+                <stop offset="100%" stop-color="#FFD740" />
+              </linearGradient>
+            </defs>
+            <path d="M 50,10 L 90,85 L 70,85 L 50,45 L 30,85 L 10,85 Z" fill="url(#apex-grad-dup)" />
+            <path d="M 50,30 L 62,60 L 38,60 Z" fill="#FFFFFF" opacity="0.9" />
+          </svg>
+          <span class="brand-name">Apex</span>
+        </div>
+        <!-- Logo 2: BuildCorp -->
+        <div class="brand-item">
+          <svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="build-grad-dup" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00E5FF" />
+                <stop offset="100%" stop-color="#2979FF" />
+              </linearGradient>
+            </defs>
+            <rect x="15" y="15" width="30" height="30" rx="4" fill="url(#build-grad-dup)" />
+            <rect x="55" y="15" width="30" height="30" rx="4" fill="url(#build-grad-dup)" opacity="0.8" />
+            <rect x="15" y="55" width="70" height="30" rx="4" fill="url(#build-grad-dup)" />
+          </svg>
+          <span class="brand-name">BuildCorp</span>
+        </div>
+        <!-- Logo 3: Structura -->
+        <div class="brand-item">
+          <svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="struct-grad-dup" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#00E676" />
+                <stop offset="100%" stop-color="#B9F6CA" />
+              </linearGradient>
+            </defs>
+            <polygon points="50,10 85,30 85,70 50,90 15,70 15,30" fill="none" stroke="url(#struct-grad-dup)" stroke-width="8" stroke-linejoin="round" />
+            <line x1="50" y1="10" x2="50" y2="90" stroke="url(#struct-grad-dup)" stroke-width="4" />
+            <line x1="15" y1="30" x2="85" y2="70" stroke="url(#struct-grad-dup)" stroke-width="4" />
+            <line x1="15" y1="70" x2="85" y2="30" stroke="url(#struct-grad-dup)" stroke-width="4" />
+          </svg>
+          <span class="brand-name">Structura</span>
+        </div>
+        <!-- Logo 4: Nova -->
+        <div class="brand-item">
+          <svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="nova-grad-dup" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FF4081" />
+                <stop offset="100%" stop-color="#651FFF" />
+              </linearGradient>
+            </defs>
+            <path d="M 50,10 L 58,38 L 86,38 L 64,55 L 72,83 L 50,66 L 28,83 L 36,55 L 14,38 L 42,38 Z" fill="url(#nova-grad-dup)" />
+            <circle cx="50" cy="48" r="12" fill="#FFFFFF" opacity="0.3" />
+          </svg>
+          <span class="brand-name">Nova</span>
+        </div>
+        <!-- Logo 5: Vertex -->
+        <div class="brand-item">
+          <svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="vertex-grad-dup" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#FFD600" />
+                <stop offset="100%" stop-color="#FF6D00" />
+              </linearGradient>
+            </defs>
+            <path d="M 50,15 L 85,50 L 70,65 L 50,45 L 30,65 L 15,50 Z" fill="url(#vertex-grad-dup)" />
+            <path d="M 50,40 L 85,75 L 70,90 L 50,70 L 30,90 L 15,75 Z" fill="url(#vertex-grad-dup)" opacity="0.75" />
+          </svg>
+          <span class="brand-name">Vertex</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================
+       ABOUT PREVIEW SECTION
+       ==================================== -->
+  <section class="about-preview section-padding" id="about">
+    <div class="container">
+      <!-- Left column: Visuals -->
+      <div class="about-visual reveal-left">
+        <div class="about-visual-overlay"></div>
+
+        <!-- Floating badge -->
+        <div class="about-badge-floating">
+          <h4>100%</h4>
+          <p>Commitment to building sustainable and carbon-neutral properties.</p>
+        </div>
+      </div>
+
+      <!-- Right column: Text details -->
+      <div class="about-content reveal-right">
+        <span class="section-subtitle">Who We Are</span>
+        <h2 class="about-title">Pioneering Engineering & Architectural Excellence</h2>
+        <p class="about-desc">
+          For over 15 years, Stackly has been transforming conceptual designs into premium landmarks. We prioritize
+          innovative technology, sustainable methods, and strict safety guidelines to build spaces that stand the test
+          of time.
+        </p>
+
+        <!-- Feature checkboxes list -->
+        <div class="about-features">
+          <div class="about-feature-item">
+            <div class="feature-icon-wrapper" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <span>Certified Engineers</span>
+          </div>
+
+          <div class="about-feature-item">
+            <div class="feature-icon-wrapper" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <span>Sustainable Construction</span>
+          </div>
+
+          <div class="about-feature-item">
+            <div class="feature-icon-wrapper" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <span>Modern Technology</span>
+          </div>
+
+          <div class="about-feature-item">
+            <div class="feature-icon-wrapper" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <span>Safety First</span>
+          </div>
+        </div>
+
+        <a href="about.html" class="btn btn-primary">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================
+       SERVICES SECTION
+       ==================================== -->
+  <section class="services section-padding" id="services">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-subtitle">What We Do</span>
+        <h2 class="section-title">Our Premium Construction Services</h2>
+        <p class="section-desc">
+          We specialize in diverse sectors of construction, building infrastructure that drives progress, powers
+          business, and houses luxury living.
+        </p>
+      </div>
+
+      <!-- Services Grid (6 cards) -->
+      <div class="services-grid">
+        <!-- Service 1: Residential Construction -->
+        <div class="service-card reveal">
+          <div class="service-card-img-wrapper">
+            <img class="service-card-img"
+              src="assets/service-residential.webp"
+              alt="Premium modern residential villa exterior structural design" loading="lazy">
+          </div>
+          <div class="service-card-content">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
+            <h3>Residential Construction</h3>
+            <p>Designing and building luxury condominiums, smart homes, and high-rise luxury apartment complexes
+              tailored to modern living.</p>
+            <a href="services.html" class="btn-link">Learn More <svg fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></a>
+          </div>
+        </div>
+
+        <!-- Service 2: Commercial Buildings -->
+        <div class="service-card reveal delay-100">
+          <div class="service-card-img-wrapper">
+            <img class="service-card-img"
+              src="assets/service-commercial.webp"
+              alt="Modern corporate skyscraper building towers" loading="lazy">
+          </div>
+          <div class="service-card-content">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="2" ry="2" />
+                <rect x="6" y="6" width="12" height="12" />
+                <line x1="6" y1="12" x2="18" y2="12" />
+                <line x1="12" y1="6" x2="12" y2="18" />
+              </svg>
+            </div>
+            <h3>Commercial Buildings</h3>
+            <p>Delivering state-of-the-art office towers, shopping centers, hotels, and collaborative corporate campuses
+              that redefine workspace.</p>
+            <a href="services.html" class="btn-link">Learn More <svg fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></a>
+          </div>
+        </div>
+
+        <!-- Service 3: Industrial Projects -->
+        <div class="service-card reveal delay-200">
+          <div class="service-card-img-wrapper">
+            <img class="service-card-img"
+              src="assets/service-industrial.webp"
+              alt="Industrial factory processing columns and piping" loading="lazy">
+          </div>
+          <div class="service-card-content">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 21H2V3l7 4 7-4 6 4v18z" />
+                <path d="M14 17h4" />
+                <path d="M14 13h4" />
+                <path d="M6 17h4" />
+                <path d="M6 13h4" />
+              </svg>
+            </div>
+            <h3>Industrial Projects</h3>
+            <p>Constructing high-efficiency production warehouses, industrial manufacturing plants, processing
+              facilities, and storage terminals.</p>
+            <a href="services.html" class="btn-link">Learn More <svg fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></a>
+          </div>
+        </div>
+
+        <!-- Service 4: Architecture Design -->
+        <div class="service-card reveal">
+          <div class="service-card-img-wrapper">
+            <img class="service-card-img"
+              src="assets/service-renovation.webp"
+              alt="Architectural design drawings and blueprints layout" loading="lazy">
+          </div>
+          <div class="service-card-content">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 2 22 22 22" />
+                <circle cx="12" cy="13" r="3" />
+              </svg>
+            </div>
+            <h3>Architecture Design</h3>
+            <p>Creating visionary blueprints and blueprints layout modeling that combine architectural luxury with
+              resource-efficient parameters.</p>
+            <a href="services.html" class="btn-link">Learn More <svg fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></a>
+          </div>
+        </div>
+
+        <!-- Service 5: Renovation Services -->
+        <div class="service-card reveal delay-100">
+          <div class="service-card-img-wrapper">
+            <img class="service-card-img"
+              src="assets/service-project-management.webp"
+              alt="Home interior structural renovation works" loading="lazy">
+          </div>
+          <div class="service-card-content">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                  d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+              </svg>
+            </div>
+            <h3>Renovation Services</h3>
+            <p>Revitalizing dated buildings through structural retrofitting, interior transformations, and environmental
+              facade modernization upgrades.</p>
+            <a href="services.html" class="btn-link">Learn More <svg fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></a>
+          </div>
+        </div>
+
+        <!-- Service 6: Project Management -->
+        <div class="service-card reveal delay-200">
+          <div class="service-card-img-wrapper">
+            <img class="service-card-img"
+              src="assets/service-architecture.webp"
+              alt="Site engineering project manager organizing construction tasks" loading="lazy">
+          </div>
+          <div class="service-card-content">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+                <path d="M9 14h6" />
+                <path d="M9 18h6" />
+                <path d="M9 10h3" />
+              </svg>
+            </div>
+            <h3>Project Management</h3>
+            <p>Strict oversight of procurement, quality control, scheduling milestones, budgeting, and safety compliance
+              throughout project phases.</p>
+            <a href="services.html" class="btn-link">Learn More <svg fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================
+       WATCH OUR STORY SECTION
+       ==================================== -->
+       <section class="story-video" id="our-story" aria-label="Watch Our Story">
+        <div class="story-video-bg" role="img"
+          aria-label="Modern house surrounded by lush green lawn and garden hedges"></div>
+        <div class="story-video-overlay"></div>
+        <div class="container story-video-inner reveal">
+          <div class="story-video-text">
+            <span class="section-subtitle">Our Journey</span>
+            <h2 class="story-video-title">Watch Our Story</h2>
+            <p class="story-video-desc">
+              Discover how <span class="story-highlight">Stackly</span> grew from a small engineering team into a
+              <span class="story-highlight">trusted leader in premium construction</span> — turning bold visions into
+              landmark structures across residential, commercial, and industrial sectors worldwide.
+            </p>
+            <ul class="story-highlights">
+              <li class="story-highlight-item">
+                <span class="story-highlight-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span><strong class="story-highlight">15+ Years</strong> of engineering &amp; architectural excellence</span>
+              </li>
+              <li class="story-highlight-item">
+                <span class="story-highlight-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span><strong class="story-highlight">LEED Certified</strong> sustainable &amp; green building practices</span>
+              </li>
+              <li class="story-highlight-item">
+                <span class="story-highlight-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </span>
+                <span><strong class="story-highlight">Safety First</strong> with zero-compromise site standards</span>
+              </li>
+            </ul>
+          </div>
+          <div class="story-video-action">
+            <a href="404.html" class="story-play-btn" aria-label="Play Our Story video">
+              <span class="story-play-pulse story-play-pulse-1" aria-hidden="true"></span>
+              <span class="story-play-pulse story-play-pulse-2" aria-hidden="true"></span>
+              <span class="story-play-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+            </a>
+            <span class="story-play-label">Our Story</span>
+          </div>
+        </div>
+      </section>
+
+  <!-- ====================================
+       WHY CHOOSE US SECTION
+       ==================================== -->
+  <section class="why-choose-us section-padding" id="why-choose-us">
+    <div class="container">
+      <!-- Left side: Text and skills/progress bars -->
+      <div class="why-info reveal-left">
+        <span class="badge">Our Standards</span>
+        <h2>Why Clients Trust Stackly with Their Visions</h2>
+        <p class="lead">
+          We combine a dedicated team of master builders with safety protocols and strict quality control processes to
+          ensure stress-free project execution.
+        </p>
+
+        <!-- Progress Bars -->
+        <div class="skills-wrapper">
+          <!-- Item 1: Experience -->
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-title">Industrial Experience & Management</span>
+              <span class="skill-percentage" data-target="95">0%</span>
+            </div>
+            <div class="progress-bar-bg" aria-hidden="true">
+              <div class="progress-bar" data-width="95%"></div>
+            </div>
+          </div>
+
+          <!-- Item 2: Quality Assurance -->
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-title">Quality Assurance & Workmanship</span>
+              <span class="skill-percentage" data-target="98">0%</span>
+            </div>
+            <div class="progress-bar-bg" aria-hidden="true">
+              <div class="progress-bar" data-width="98%"></div>
+            </div>
+          </div>
+
+          <!-- Item 3: Safety Standards -->
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-title">Safety Protocols & Compliance</span>
+              <span class="skill-percentage" data-target="100">0%</span>
+            </div>
+            <div class="progress-bar-bg" aria-hidden="true">
+              <div class="progress-bar" data-width="100%"></div>
+            </div>
+          </div>
+
+          <!-- Item 4: Advanced Technology -->
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-title">Advanced Building Technology (BIM)</span>
+              <span class="skill-percentage" data-target="90">0%</span>
+            </div>
+            <div class="progress-bar-bg" aria-hidden="true">
+              <div class="progress-bar" data-width="90%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right side: Counters block -->
+      <div class="why-counters reveal-right">
+        <!-- Counter 1: Expert Team -->
+        <div class="counter-card">
+          <div class="counter-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </div>
+          <div class="counter-number" data-target="150">0</div>
+          <div class="counter-label">Expert Team Members</div>
+        </div>
+
+        <!-- Counter 2: Completed Projects -->
+        <div class="counter-card">
+          <div class="counter-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+            </svg>
+          </div>
+          <div class="counter-number" data-target="500">0</div>
+          <div class="counter-label">Completed Landmarks</div>
+        </div>
+
+        <!-- Counter 3: Awards Won -->
+        <div class="counter-card">
+          <div class="counter-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+          </div>
+          <div class="counter-number" data-target="50">0</div>
+          <div class="counter-label">National Industry Awards</div>
+        </div>
+
+        <!-- Counter 4: Years Experience -->
+        <div class="counter-card">
+          <div class="counter-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+          </div>
+          <div class="counter-number" data-target="15">0</div>
+          <div class="counter-label">Years of Excellence</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================
+       FEATURED PROJECTS SECTION
+       ==================================== -->
+  <section class="projects section-padding" id="projects">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-subtitle">Our Work</span>
+        <h2 class="section-title">Featured Modern Developments</h2>
+        <p class="section-desc">
+          Browse through our recently completed projects demonstrating premium architecture, robust framing structures,
+          and high-end detail design.
+        </p>
+      </div>
+
+      <!-- Projects Masonry-like Grid -->
+      <div class="projects-grid">
+        <!-- Project 1: Tall -->
+        <div class="project-item tall reveal">
+          <img class="project-img"
+            src="assets/project-1.webp"
+            alt="Beautiful modern premium glass residential towers reflecting blue clouds" loading="lazy">
+          <div class="project-overlay">
+            <div class="project-meta">
+              <span class="project-tag">Residential</span>
+              <h3 class="project-title">The Horizon Residence Towers</h3>
+              <a href="projects.html" class="project-link">View Details <svg fill="none" stroke="currentColor"
+                  stroke-width="2" viewBox="0 0 24 24">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-item reveal">
+          <img class="project-img"
+            src="assets/project-2.webp"
+            alt="Commercial Shopping Mall complex exterior illuminated with warm lights at night" loading="lazy">
+          <div class="project-overlay">
+            <div class="project-meta">
+              <span class="project-tag">Commercial</span>
+              <h3 class="project-title">Omnia Retail Complex & Plaza</h3>
+              <a href="projects.html" class="project-link">View Details <svg fill="none" stroke="currentColor"
+                  stroke-width="2" viewBox="0 0 24 24">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-item reveal">
+          <img class="project-img"
+            src="assets/project-3.webp"
+            alt="Heavy duty mechanical equipment inside structural industrial processing plant" loading="lazy">
+          <div class="project-overlay">
+            <div class="project-meta">
+              <span class="project-tag">Industrial</span>
+              <h3 class="project-title">Apex Bio-Chemical Plant</h3>
+              <a href="projects.html" class="project-link">View Details <svg fill="none" stroke="currentColor"
+                  stroke-width="2" viewBox="0 0 24 24">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4: Tall -->
+        <div class="project-item tall reveal">
+          <img class="project-img"
+            src="assets/project-4.webp"
+            alt="Modern commercial smart office glass tower corporate business district skyscraper" loading="lazy">
+          <div class="project-overlay">
+            <div class="project-meta">
+              <span class="project-tag">Commercial</span>
+              <h3 class="project-title">Metropolis Smart Office Hub</h3>
+              <a href="projects.html" class="project-link">View Details <svg fill="none" stroke="currentColor"
+                  stroke-width="2" viewBox="0 0 24 24">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================
+       TESTIMONIALS SECTION
+       ==================================== -->
+  <section class="testimonials section-padding" aria-label="Client Testimonials">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-subtitle">Reviews</span>
+        <h2 class="section-title">What Our Clients Say About Us</h2>
+        <p class="section-desc">
+          Read feedback from partners who entrusted Stackly with multi-million dollar residential, commercial, and
+          industrial ventures.
+        </p>
+      </div>
+
+      <!-- Testimonials Carousel Slider -->
+      <div class="testimonials-carousel" id="testimonials-carousel">
+        <div class="testimonials-track-container">
+          <div class="testimonials-track" id="testimonials-track">
+
+            <!-- Slide 1 -->
+            <div class="testimonial-slide">
+              <div class="testimonial-rating" aria-label="5 out of 5 stars">
+                <svg viewBox="0 0 20 20" fill="currentColor" class="star">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg viewBox="0 0 20 20" fill="currentColor" class="star">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg viewBox="0 0 20 20" fill="currentColor" class="star">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg viewBox="0 0 20 20" fill="currentColor" class="star">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg viewBox="0 0 20 20" fill="currentColor" class="star">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              </div>
+              <p class="testimonial-text">
+                "Working with Stackly on our corporate headquarters was a seamless experience. They maintained
+                aggressive deadlines without compromising on construction detailing and structural rigidity. True
+                construction masters."
+              </p>
+              <div class="testimonial-user">
+                <img class="testimonial-avatar"
+                  src="assets/avatar-john-miller.webp"
+                  alt="John Miller, CEO of Apex Development" width="60" height="60" loading="lazy">
+                <div class="testimonial-user-info">
+                  <div class="testimonial-user-name">John Miller</div>
+                  <div class="testimonial-user-role">CEO, Apex Development</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="testimonial-slide">
+              <div class="testimonial-rating" aria-label="5 out of 5 stars">
+                <svg viewBox="0 0 20 20" fill="currentColor" class="star">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg viewBox="0 0 20 20" fill="currentColor" class="star">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg viewBox="0 0 20 20" fill="currentColor" class="star">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg viewBox="0 0 20 20" fill="currentColor" class="star">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg viewBox="0 0 20 20" fill="currentColor" class="star">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              </div>
+              <p class="testimonial-text">
+                "Sustainability was a primary driver for our retail park. Stackly introduced cutting-edge materials and
+                green workflows, securing Gold LEED certification for the finished buildings. We couldn't be happier."
+              </p>
+              <div class="testimonial-user">
+                <img class="testimonial-avatar"
+                  src="assets/avatar-sarah-jenkins.webp"
+                  alt="Sarah Jenkins, VP of Structura Group" width="60" height="60" loading="lazy">
+                <div class="testimonial-user-info">
+                  <div class="testimonial-user-name">Sarah Jenkins</div>
+                  <div class="testimonial-user-role">VP, Structura Group</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="testimonial-slide">
+              <div class="testimonial-rating" aria-label="5 out of 5 stars">
+                <svg viewBox="0 0 20 20" fill="currentColor" class="star">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg viewBox="0 0 20 20" fill="currentColor" class="star">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg viewBox="0 0 20 20" fill="currentColor" class="star">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg viewBox="0 0 20 20" fill="currentColor" class="star">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <svg viewBox="0 0 20 20" fill="currentColor" class="star">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              </div>
+              <p class="testimonial-text">
+                "Building an industrial biochemical facility comes with massive safety and regulation requirements.
+                Stackly executed the project flawlessly, completing the commissioning with zero safety incidents."
+              </p>
+              <div class="testimonial-user">
+                <img class="testimonial-avatar"
+                  src="assets/avatar-david-chen.webp"
+                  alt="David Chen, Director of Vertex Capital" width="60" height="60" loading="lazy">
+                <div class="testimonial-user-info">
+                  <div class="testimonial-user-name">David Chen</div>
+                  <div class="testimonial-user-role">Director, Vertex Capital</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Dot indicators -->
+        <div class="carousel-dots" id="carousel-dots">
+          <button class="carousel-dot active" aria-label="Go to testimonial slide 1"></button>
+          <button class="carousel-dot" aria-label="Go to testimonial slide 2"></button>
+          <button class="carousel-dot" aria-label="Go to testimonial slide 3"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================
+       CALL TO ACTION SECTION
+       ==================================== -->
+  <section class="cta-section">
+    <div class="cta-bg">
+      <img src="assets/cta-blueprints.webp" alt="Engineering blueprints and site drafting layouts covering a dark desk" loading="lazy">
+    </div>
+    <div class="cta-overlay"></div>
+    <div class="container">
+      <h2 class="cta-title">Ready To Build Your Next Project?</h2>
+      <p class="cta-desc">
+        Let's transform your development vision into structural reality. Partner with Stackly's certified engineers and
+        architects.
+      </p>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-primary">Get Free Consultation</a>
+        <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================
+       FOOTER
+       ==================================== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: About & Socials -->
+        <div class="footer-col">
+          <a href="#home" class="logo" aria-label="Stackly Homepage">
+            <img src="assets/stackly-logo.webp" alt="Stackly" class="logo-img" width="220" height="54">
+          </a>
+          <p class="footer-about-text">
+            Stackly is an industry leader in premium architectural designs, engineering, and sustainable development.
+          </p>
+          <div class="footer-socials">
+            <!-- Facebook -->
+            <a href="404.html" class="social-icon" aria-label="Facebook">
+              <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z" />
+              </svg>
+            </a>
+            <!-- LinkedIn -->
+            <a href="404.html" class="social-icon" aria-label="LinkedIn">
+              <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+              </svg>
+            </a>
+            <!-- Instagram -->
+            <a href="404.html" class="social-icon" aria-label="Instagram">
+              <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+              </svg>
+            </a>
+            <!-- Twitter -->
+            <a href="404.html" class="social-icon" aria-label="Twitter">
+              <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 2: Company -->
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="404.html">Careers</a></li>
+            <li><a href="blog.html">News & Blog</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Services -->
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="#services">Residential</a></li>
+            <li><a href="#services">Commercial</a></li>
+            <li><a href="#services">Industrial</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Quick Links -->
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="404.html">Get Quote</a></li>
+            <li><a href="404.html">FAQ</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 5: Contact info -->
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <!-- Phone -->
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+            </div>
+            <div class="footer-contact-info">
+              <p>+91 1234567890</p>
+            </div>
+          </div>
+          <!-- Email -->
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+            </div>
+            <div class="footer-contact-info">
+              <p>info@stackly.com</p>
+            </div>
+          </div>
+          <!-- Address -->
+          <div class="footer-contact-item">
+            <div class="footer-contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <div class="footer-contact-info">
+              <p>Salem, Tamil Nadu - 636005</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legal footer bottom -->
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          &copy; <span id="current-year">2026</span> Stackly. All rights reserved.
+        </div>
+        <div class="footer-legal">
+          <a href="404.html">Privacy Policy</a>
+          <a href="404.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Custom cursor nodes -->
+  <div class="custom-cursor-dot" id="custom-cursor-dot" aria-hidden="true"></div>
+  <div class="custom-cursor-outline" id="custom-cursor-outline" aria-hidden="true"></div>
+
+  <!-- Main Scripts -->
+  <script src="script.js"></script>
+</body>
+
+</html>
