@@ -2,7 +2,7 @@
 if (localStorage.getItem('currentUser') && !window.location.pathname.endsWith('dashboard.html')) {
   window.location.replace('dashboard.html');
 }
-
+ 
 document.addEventListener('DOMContentLoaded', () => {
 
   /* --- LOADER SCREEN HANDLER --- */

@@ -272,7 +272,7 @@ img {
   border-radius: 50%;
   animation: rotateRing 1.5s linear infinite;
 }
-
+ 
 /* Glowing background */
 .loader-glow {
   position: absolute;
