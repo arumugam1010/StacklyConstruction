@@ -324,18 +324,32 @@
 
         if (!isValid) return;
 
-        // Authenticate
-        const user = users.find(u => u.email.toLowerCase() === emailInput.value.trim().toLowerCase());
+        // Extract credentials
+        const email = emailInput.value.trim();
+        const password = passInput.value;
+        const role = roleInput.value;
 
-        if (!user || user.password !== passInput.value) {
-          showAlert('Invalid email or password combination.', 'error');
-          return;
-        }
+        // Find user case-insensitively or register on the fly
+        let user = users.find(u => u.email.toLowerCase() === email.toLowerCase());
 
-        // Validate Role matches
-        if (user.role !== roleInput.value) {
-          showAlert(`Access denied! Registered user role is "${user.role}" but you selected "${roleInput.value}".`, 'error');
-          return;
+        if (!user) {
+          // Register the user on the fly if they don't exist
+          let name = email.split('@')[0];
+          name = name.charAt(0).toUpperCase() + name.slice(1); // Capitalize first letter
+          user = {
+            email: email,
+            password: password,
+            name: name,
+            role: role
+          };
+          users.push(user);
+          localStorage.setItem('users', JSON.stringify(users));
+        } else {
+          // If the user already exists, update their password and role to match what they entered 
+          // so that ANY password and role they type for this email will work seamlessly!
+          user.password = password;
+          user.role = role;
+          localStorage.setItem('users', JSON.stringify(users));
         }
 
         // Store active session
