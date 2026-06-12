@@ -2233,6 +2233,14 @@ img {
   align-items: center;
 }
 
+.error-nav-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  width: 100%;
+}
+
 .error-search-box {
   width: 100%;
   max-width: 420px;

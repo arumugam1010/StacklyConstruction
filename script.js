@@ -1,5 +1,10 @@
-// Immediate redirect check: if user is logged in, restrict access to public pages and lock them in dashboard
-if (localStorage.getItem('currentUser') && !window.location.pathname.endsWith('dashboard.html')) {
+// Immediate redirect check: if user is logged in, restrict access to public pages (except index.html and 404.html) and lock them in dashboard
+if (localStorage.getItem('currentUser') &&
+    !window.location.pathname.endsWith('dashboard.html') &&
+    !window.location.pathname.endsWith('index.html') &&
+    window.location.pathname !== '/' &&
+    !window.location.pathname.endsWith('/') &&
+    !window.location.pathname.endsWith('404.html')) {
   window.location.replace('dashboard.html');
 }
  
@@ -129,9 +134,9 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --- MOBILE HAMBURGER MENU OVERLAY --- */
   const menuToggle = document.getElementById('menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
-  const mobileMenuLinks = mobileMenu.querySelectorAll('.nav-link');
 
   if (menuToggle && mobileMenu) {
+    const mobileMenuLinks = mobileMenu.querySelectorAll('.nav-link');
     const toggleMenu = () => {
       const isOpen = mobileMenu.classList.contains('open');
       if (isOpen) {

@@ -266,6 +266,48 @@
       document.getElementById('sidebar-avatar').textContent = activeUser.name.charAt(0).toUpperCase();
     }
 
+    function redirectTo404Page() {
+      window.location.href = '404.html';
+    }
+
+    function initDashboardActionRedirects() {
+      const mainContent = document.getElementById('dashboard-main-content');
+      if (!mainContent) return;
+
+      mainContent.addEventListener('click', (e) => {
+        const button = e.target.closest('button');
+        if (!button) return;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        redirectTo404Page();
+      }, true);
+
+      mainContent.addEventListener('submit', (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        redirectTo404Page();
+      }, true);
+
+      const payModal = document.getElementById('pay-modal');
+      if (payModal) {
+        payModal.addEventListener('click', (e) => {
+          const button = e.target.closest('button');
+          if (!button) return;
+          if (button.classList.contains('db-modal-close')) return;
+          if (button.textContent.trim() === 'Back to Dashboard') return;
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          redirectTo404Page();
+        }, true);
+
+        payModal.addEventListener('submit', (e) => {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          redirectTo404Page();
+        }, true);
+      }
+    }
+
     // Switch panels in Sidebar tabs
     function showSection(sectionId) {
       document.querySelectorAll('.db-section').forEach(sec => sec.classList.remove('active'));
@@ -1829,6 +1871,7 @@
       seedDashboardData();
       checkAuth();
       buildDashboardModules();
+      initDashboardActionRedirects();
 
       // Mobile sidebar hamburger toggle
       const menuToggle = document.getElementById('menu-toggle');
