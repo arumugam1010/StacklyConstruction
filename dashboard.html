@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage construction timelines, client approvals, engineering reports, and contractor tasks.">
+  <title>Portal Dashboard | Stackly Construction</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Auth & Dashboard Stylesheet -->
+  <link rel="stylesheet" href="auth-dashboard.css">
+</head>
+
+<body>
+
+  <!-- ====================================
+       LOADER SCREEN
+       ==================================== -->
+  <div class="loader-wrapper" id="loader">
+    <div class="loader-container">
+      <div class="loader-ring" aria-hidden="true"></div>
+      <div class="loader-glow" aria-hidden="true"></div>
+      <svg class="loader-logo" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="loader-yellow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FFF066" />
+            <stop offset="100%" stop-color="#FFD600" />
+          </linearGradient>
+        </defs>
+        <g fill="url(#loader-yellow)">
+          <path
+            d="M 64,2 C 60,15 48,32 32,48 C 14,66 6,84 20,102 C 30,115 56,114 56,98 C 56,90 44,88 35,82 C 26,76 30,62 38,52 C 46,42 62,25 64,2 Z" />
+          <path
+            d="M 64,2 C 60,15 48,32 32,48 C 14,66 6,84 20,102 C 30,115 56,114 56,98 C 56,90 44,88 35,82 C 26,76 30,62 38,52 C 46,42 62,25 64,2 Z"
+            transform="rotate(180, 50, 80)" />
+        </g>
+      </svg>
+    </div>
+  </div>
+  <script>document.body.classList.add('menu-open');</script>
+
+  <!-- ====================================
+       HEADER / NAVBAR
+       ==================================== -->
+  <header class="header scrolled" id="header" role="banner">
+    <div class="container nav-container">
+      <a href="index.html" class="logo" aria-label="Stackly Homepage">
+        <img src="assets/stackly-logo.webp" alt="Stackly" class="logo-img" width="220" height="54">
+      </a>
+      <div class="nav-actions">
+        <button class="nav-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu"
+          aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hidden Mobile Menu Overlay placeholder to prevent script.js exceptions -->
+  <div class="nav-overlay" id="mobile-menu" aria-hidden="true" role="dialog" style="display: none;">
+    <a href="#" class="nav-link" style="display: none;"></a>
+  </div>
+
+  <!-- ====================================
+       DASHBOARD CONTENT GRID
+       ==================================== -->
+  <div class="dashboard-wrapper">
+    <!-- Left Sidebar -->
+    <aside class="db-sidebar">
+      <div class="db-user-profile">
+        <div class="db-user-avatar" id="sidebar-avatar">U</div>
+        <div class="db-user-details">
+          <div class="db-user-name" id="sidebar-name">User Name</div>
+          <div class="db-user-role" id="sidebar-role">Role Label</div>
+        </div>
+      </div>
+
+      <!-- Navigation links populated by Role Javascript -->
+      <nav class="db-menu" id="sidebar-menu-links">
+        <!-- JS Injected Links -->
+      </nav>
+
+      <div class="db-logout-btn">
+        <button onclick="handleLogout()" class="db-menu-item" style="color: #FF5252;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          Logout Session
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Dashboard Area -->
+    <main class="db-content" id="dashboard-main-content">
+      <!-- RENDERED SECTIONS CONTAINER -->
+    </main>
+  </div>
+
+  <!-- ====================================
+       SIMULATED CHECKOUT INVOICE MODAL
+       ==================================== -->
+  <div class="db-modal-overlay" id="pay-modal">
+    <div class="db-modal-card">
+      <button class="db-modal-close" onclick="closePayModal()">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <!-- Step 1: Payment Checkout Form -->
+      <div id="pay-form-screen">
+        <div class="db-modal-header">
+          <h2 class="db-modal-title">Secure Land Payment</h2>
+          <p style="font-size: 13px; color: var(--text-secondary);">Simulating a secured transaction transfer</p>
+        </div>
+        <form id="form-pay-action">
+          <div style="background: rgba(255,193,7,0.05); padding: 14px; border: 1px dashed var(--border-yellow-glass); border-radius: 4px; display: flex; justify-content: space-between; margin-bottom: 20px;">
+            <span style="font-size: 14px; font-weight: 500;">Invoice Total:</span>
+            <span style="font-size: 16px; font-weight: 700; color: var(--primary);" id="pay-amount-display">₹0.00</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Cardholder Name</label>
+            <input type="text" class="form-input" placeholder="e.g. Karthik Ramasamy" id="pay-card-name" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Card Number</label>
+            <input type="text" class="form-input" placeholder="4532 •••• •••• 8812" id="pay-card-num" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label">Expiry Date</label>
+              <input type="text" class="form-input" placeholder="MM/YY" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">CVV / CVN</label>
+              <input type="password" class="form-input" placeholder="•••" maxlength="3" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Pay Securely Now</button>
+        </form>
+      </div>
+
+      <!-- Step 2: Payment Progress Spinner -->
+      <div class="pay-loading-screen" id="pay-loading-screen">
+        <div class="pay-spinner"></div>
+        <h3 style="font-family: var(--font-primary); font-size: 18px; margin-bottom: 8px;">Processing Transaction</h3>
+        <p style="font-size: 13px; color: var(--text-secondary);">Verifying funds transfer with Indian Bank Gateway...</p>
+      </div>
+
+      <!-- Step 3: Success State -->
+      <div class="pay-success-screen" id="pay-success-screen">
+        <div class="pay-success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <h3 style="font-family: var(--font-primary); font-size: 20px; color: #00E676; margin-bottom: 8px;">Payment Completed!</h3>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 6px;" id="pay-success-id">Receipt ID: #ST-8291882</p>
+        <p style="font-size: 12px; color: var(--text-muted);">Thank you. A formal digital invoice receipt has been posted to your documents portal.</p>
+        <button class="btn btn-secondary" onclick="closePayModal()" style="width: 100%; margin-top: 24px;">Back to Dashboard</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="custom-cursor-dot" id="custom-cursor-dot" aria-hidden="true"></div>
+  <div class="custom-cursor-outline" id="custom-cursor-outline" aria-hidden="true"></div>
+
+  <!-- Global scripts -->
+  <script src="script.js"></script>
+
+  <!-- Dashboard Controller Script -->
+  <script>
+    let activeUser = null;
+    let selectedActiveInvoiceId = null;
+
+    // Direct message simulated chat memory
+    const chatDialogueList = [
+      "Hello! Thank you for reaching out to Stackly. How can we help you with your project today?",
+      "We will assign Priya Menon to review the schematic revisions in your portal. Let us know if you need additional details.",
+      "The site supervisor Rajesh Kumar has confirmed that foundation pouring is 100% completed. The budget is on schedule.",
+      "Excellent. I have registered your change order request. We'll send the quote detail directly to the Admin approvals section."
+    ];
+    let chatMessageCounter = 0;
+
+    // Dynamic Seed Data Initializations
+    function seedDashboardData() {
+      // Quotes seeding (Client -> Admin)
+      if (!localStorage.getItem('quotes')) {
+        localStorage.setItem('quotes', JSON.stringify([
+          { id: 'Q1', client: 'Karthik Client', project: 'Coimbatore Luxury Villa', details: 'Residential build 4500sqft double storey', cost: '₹1,20,00,000', status: 'Approved' },
+          { id: 'Q2', client: 'Meenakshi Sundaram', project: 'Salem Plaza Block B', details: 'Interior commercial fit-out works', cost: '₹45,00,000', status: 'Pending' },
+          { id: 'Q3', client: 'Apex Fabrics LTD', project: 'Salem Warehouse Expansion', details: 'Industrial steel framing extension works', cost: '₹85,00,000', status: 'Pending' }
+        ]));
+      }
+
+      // Material stock levels (Site Engineer)
+      if (!localStorage.getItem('materials')) {
+        localStorage.setItem('materials', JSON.stringify([
+          { id: 'M1', name: 'OPC Cement (50kg bags)', qty: 450, unit: 'Bags' },
+          { id: 'M2', name: 'TMT Reinforcement Steel', qty: 12.5, unit: 'Tons' },
+          { id: 'M3', name: 'River Sand (Coarse)', qty: 80, unit: 'CFT' },
+          { id: 'M4', name: 'Solid Brick Blocks', qty: 8500, unit: 'Units' }
+        ]));
+      }
+
+      // Site progress reporting forms logs
+      if (!localStorage.getItem('dailyReports')) {
+        localStorage.setItem('dailyReports', JSON.stringify([
+          { id: 'R1', date: '2026-06-10', weather: 'Sunny (38°C)', workers: 34, status: 'On Schedule', notes: 'Completed column casting of Zone A. Received reinforcement steel bundles.' },
+          { id: 'R2', date: '2026-06-09', weather: 'Heavy Rain', workers: 12, status: 'Delayed', notes: 'Slight delay due to waterlogged foundation zone. Safety checks conducted.' }
+        ]));
+      }
+
+      // PM Task Board task list
+      if (!localStorage.getItem('tasks')) {
+        localStorage.setItem('tasks', JSON.stringify([
+          { id: 'T1', title: 'Prepare foundation layout blueprint', category: 'Planning', priority: 'medium', status: 'completed' },
+          { id: 'T2', title: 'Excavation of site Zone A', category: 'Foundation', priority: 'high', status: 'completed' },
+          { id: 'T3', title: 'Steel framing column erection', category: 'Framing', priority: 'high', status: 'progress' },
+          { id: 'T4', title: 'Procurement of structural conduit pipes', category: 'Electrical', priority: 'low', status: 'todo' },
+          { id: 'T5', title: 'Order wallboard and finishes plaster', category: 'Finishing', priority: 'medium', status: 'todo' }
+        ]));
+      }
+
+      // Client Invoices list
+      if (!localStorage.getItem('invoices')) {
+        localStorage.setItem('invoices', JSON.stringify([
+          { id: 'INV-102', description: 'Excavation and foundation milestone payment', cost: 1800000, date: '2026-06-02', status: 'PAID' },
+          { id: 'INV-103', description: 'Steel column framing completion billing', cost: 2400000, date: '2026-06-11', status: 'PENDING' }
+        ]));
+      }
+    }
+
+    // Modal checkout logic
+    function openPayModal(invoiceId, cost) {
+      selectedActiveInvoiceId = invoiceId;
+      document.getElementById('pay-amount-display').textContent = '₹' + cost.toLocaleString('en-IN');
+      
+      // Reset views
+      document.getElementById('pay-form-screen').style.display = 'block';
+      document.getElementById('pay-loading-screen').style.display = 'none';
+      document.getElementById('pay-success-screen').style.display = 'none';
+
+      document.getElementById('pay-modal').classList.add('open');
+    }
+
+    function closePayModal() {
+      document.getElementById('pay-modal').classList.remove('open');
+    }
+
+    // Secure authentication check
+    function checkAuth() {
+      const user = localStorage.getItem('currentUser');
+      if (!user) {
+        window.location.href = 'login.html?login_required=true';
+        return;
+      }
+      activeUser = JSON.parse(user);
+
+      // Render profile indicators
+      document.getElementById('sidebar-name').textContent = activeUser.name;
+      document.getElementById('sidebar-role').textContent = activeUser.role;
+      document.getElementById('sidebar-avatar').textContent = activeUser.name.charAt(0).toUpperCase();
+    }
+
+    // Switch panels in Sidebar tabs
+    function showSection(sectionId) {
+      document.querySelectorAll('.db-section').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('.db-menu-item').forEach(item => item.classList.remove('active'));
+
+      const targetSection = document.getElementById('sec-' + sectionId);
+      if (targetSection) targetSection.classList.add('active');
+
+      const targetBtn = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
+      if (targetBtn) targetBtn.classList.add('active');
+
+      // Close mobile sidebar and toggle state when a section is clicked
+      const sidebar = document.querySelector('.db-sidebar');
+      const menuToggle = document.getElementById('menu-toggle');
+      if (sidebar && sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+      }
+      if (menuToggle && menuToggle.classList.contains('open')) {
+        menuToggle.classList.remove('open');
+        document.body.classList.remove('menu-open');
+      }
+    }
+
+    // Force sign out
+    function handleLogout() {
+      localStorage.removeItem('currentUser');
+      window.location.href = 'index.html';
+    }
+
+    // Theme accent manager
+    function changeThemeAccent(color) {
+      document.documentElement.style.setProperty('--primary', color);
+      if (color === '#FFC107') {
+        document.documentElement.style.setProperty('--primary-hover', '#FFB300');
+        document.documentElement.style.setProperty('--primary-glow', 'rgba(255, 193, 7, 0.15)');
+        document.documentElement.style.setProperty('--primary-glow-strong', 'rgba(255, 193, 7, 0.4)');
+      } else if (color === '#00E5FF') {
+        document.documentElement.style.setProperty('--primary-hover', '#00B8D4');
+        document.documentElement.style.setProperty('--primary-glow', 'rgba(0, 229, 255, 0.15)');
+        document.documentElement.style.setProperty('--primary-glow-strong', 'rgba(0, 229, 255, 0.4)');
+      } else if (color === '#00E676') {
+        document.documentElement.style.setProperty('--primary-hover', '#00C853');
+        document.documentElement.style.setProperty('--primary-glow', 'rgba(0, 230, 118, 0.15)');
+        document.documentElement.style.setProperty('--primary-glow-strong', 'rgba(0, 230, 118, 0.4)');
+      }
+    }
+
+    // Append Settings button and section globally
+    function appendGlobalSettings(menu, main) {
+      // 1. Sidebar menu item
+      const settingsBtn = document.createElement('button');
+      settingsBtn.className = 'db-menu-item';
+      settingsBtn.setAttribute('onclick', "showSection('settings')");
+      settingsBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        Portal Settings
+      `;
+      menu.appendChild(settingsBtn);
+
+      // 2. Settings layout HTML card panels
+      const settingsDiv = document.createElement('div');
+      settingsDiv.className = 'db-section';
+      settingsDiv.id = 'sec-settings';
+      settingsDiv.innerHTML = `
+        <div class="db-section-header">
+          <span class="db-section-subtitle">Portal Configurations</span>
+          <h1 class="db-section-title">Account Settings</h1>
+        </div>
+
+        <div class="db-two-col-grid">
+          <!-- Left Column: Personal Profile -->
+          <div class="db-card">
+            <div class="db-card-header"><h3 class="db-card-title">Personal Profile Details</h3></div>
+            <form id="form-settings-profile">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" id="settings-name" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" id="settings-email" class="form-input" disabled style="opacity: 0.6; cursor: not-allowed;">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Assigned Role</label>
+                <input type="text" id="settings-role" class="form-input" disabled style="opacity: 0.6; cursor: not-allowed;">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Update Password</label>
+                <input type="password" id="settings-password" class="form-input" placeholder="Leave blank to keep current">
+              </div>
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Save Changes</button>
+            </form>
+          </div>
+
+          <!-- Right Column: Preferences -->
+          <div class="db-card">
+            <div class="db-card-header"><h3 class="db-card-title">Portal Preferences</h3></div>
+            <form id="form-settings-preferences">
+              <div class="form-group" style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+                <input type="checkbox" id="pref-email-notif" style="width:18px; height:18px; accent-color:var(--primary);" checked>
+                <label for="pref-email-notif" style="font-size:14px; cursor:pointer;">Receive email alerts on status milestones</label>
+              </div>
+              <div class="form-group" style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+                <input type="checkbox" id="pref-sms-notif" style="width:18px; height:18px; accent-color:var(--primary);">
+                <label for="pref-sms-notif" style="font-size:14px; cursor:pointer;">Enable SMS delivery updates notifications</label>
+              </div>
+              <div class="form-group" style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+                <input type="checkbox" id="pref-safety-logs" style="width:18px; height:18px; accent-color:var(--primary);" checked>
+                <label for="pref-safety-logs" style="font-size:14px; cursor:pointer;">Subscribe to daily safety checklist reports logs</label>
+              </div>
+
+              <div style="margin-top:30px; border-top:1px solid var(--border-glass); padding-top:20px;">
+                <h4 style="font-family:var(--font-primary); font-size:14px; margin-bottom:12px; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-secondary);">Portal Theme Accent Color</h4>
+                <div style="display:flex; flex-wrap:wrap; gap:12px;">
+                  <button type="button" class="btn btn-secondary" onclick="changeThemeAccent('#FFC107')" style="padding:10px 16px; font-size:12px; border-color:#FFC107; color:#FFC107;">Yellow</button>
+                  <button type="button" class="btn btn-secondary" onclick="changeThemeAccent('#00E5FF')" style="padding:10px 16px; font-size:12px; border-color:#00E5FF; color:#00E5FF;">Cyan</button>
+                  <button type="button" class="btn btn-secondary" onclick="changeThemeAccent('#00E676')" style="padding:10px 16px; font-size:12px; border-color:#00E676; color:#00E676;">Green</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      `;
+      main.appendChild(settingsDiv);
+
+      // Populate input data
+      document.getElementById('settings-name').value = activeUser.name;
+      document.getElementById('settings-email').value = activeUser.email;
+      document.getElementById('settings-role').value = activeUser.role;
+
+      // Handle submit
+      const formProfile = document.getElementById('form-settings-profile');
+      formProfile.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newName = document.getElementById('settings-name').value.trim();
+        const newPass = document.getElementById('settings-password').value;
+
+        if (!newName) return;
+
+        // Save session
+        activeUser.name = newName;
+        localStorage.setItem('currentUser', JSON.stringify(activeUser));
+
+        // Save database
+        let users = JSON.parse(localStorage.getItem('users') || '[]');
+        users.forEach(u => {
+          if (u.email.toLowerCase() === activeUser.email.toLowerCase()) {
+            u.name = newName;
+            if (newPass) u.password = newPass;
+          }
+        });
+        localStorage.setItem('users', JSON.stringify(users));
+
+        // Update UI greetings
+        document.getElementById('sidebar-name').textContent = newName;
+        document.getElementById('sidebar-avatar').textContent = newName.charAt(0).toUpperCase();
+
+        alert('Settings updated successfully!');
+        document.getElementById('settings-password').value = '';
+      });
+    }
+
+    // RENDER: GLOBAL OVERVIEW DASHBOARD HOME
+    function renderDashboardHome(main) {
+      let homeSection = document.getElementById('sec-home');
+      if (!homeSection) {
+        homeSection = document.createElement('div');
+        homeSection.className = 'db-section';
+        homeSection.id = 'sec-home';
+        main.appendChild(homeSection);
+      }
+
+      // Read values from localStorage to show real statistics
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const quotes = JSON.parse(localStorage.getItem('quotes') || '[]');
+      const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+      const materials = JSON.parse(localStorage.getItem('materials') || '[]');
+      const dailyReports = JSON.parse(localStorage.getItem('dailyReports') || '[]');
+      const invoices = JSON.parse(localStorage.getItem('invoices') || '[]');
+
+      // Role specific content generation
+      let headerHtml = '';
+      let cardsHtml = '';
+      let panelsHtml = '';
+
+      if (activeUser.role === 'Admin') {
+        // Admin Landing Dashboard Home
+        const activeSites = quotes.filter(q => q.status === 'Approved').length + 2;
+        const totalUsers = users.length;
+        let revenue = 0;
+        invoices.forEach(inv => { if (inv.status === 'PAID') revenue += inv.cost; });
+        const pendingQuotes = quotes.filter(q => q.status === 'Pending');
+
+        headerHtml = `
+          <div class="db-section-header">
+            <span class="db-section-subtitle">Admin Control Center</span>
+            <h1 class="db-section-title">Enterprise Dashboard Home</h1>
+          </div>
+        `;
+        cardsHtml = `
+          <div class="db-metric-card" onclick="showSection('approvals')">
+            <div class="db-metric-icon" style="color: var(--primary); background: var(--primary-glow);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg></div>
+            <div class="db-metric-info">
+              <div class="db-metric-value">${activeSites}</div>
+              <div class="db-metric-label">Active Construction Sites</div>
+            </div>
+          </div>
+          <div class="db-metric-card" onclick="showSection('users')">
+            <div class="db-metric-icon" style="color: #00E5FF; background: rgba(0, 229, 255, 0.08);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg></div>
+            <div class="db-metric-info">
+              <div class="db-metric-value">${totalUsers}</div>
+              <div class="db-metric-label">Registered Portal Users</div>
+            </div>
+          </div>
+          <div class="db-metric-card">
+            <div class="db-metric-icon" style="color: #00E676; background: rgba(0, 230, 118, 0.08);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+            <div class="db-metric-info">
+              <div class="db-metric-value">₹${(revenue / 100000).toFixed(1)}L</div>
+              <div class="db-metric-label">Revenue Collected</div>
+            </div>
+          </div>
+        `;
+        panelsHtml = `
+          <div class="db-card">
+            <div class="db-card-header"><h3 class="db-card-title">Pending Quote Approvals (${pendingQuotes.length})</h3></div>
+            <div class="table-responsive">
+              <table class="db-table">
+                <thead>
+                  <tr>
+                    <th>Project</th>
+                    <th>Client</th>
+                    <th>Proposed Cost</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${pendingQuotes.length ? pendingQuotes.slice(0, 3).map(pq => `
+                    <tr>
+                      <td style="font-weight:600;">${pq.project}</td>
+                      <td>${pq.client}</td>
+                      <td style="color:var(--primary); font-weight:700;">${pq.cost}</td>
+                      <td><span class="badge-status pending">${pq.status}</span></td>
+                    </tr>
+                  `).join('') : `<tr><td colspan="4" style="text-align:center; color:var(--text-secondary);">No pending quotes require approval right now.</td></tr>`}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+
+      } else if (activeUser.role === 'Project Manager') {
+        // PM Landing Dashboard Home
+        const totalTasks = tasks.length;
+        const completedTasks = tasks.filter(t => t.status === 'completed').length;
+        const taskPercent = totalTasks ? Math.round((completedTasks / totalTasks) * 100) : 0;
+        const inProgressTasks = tasks.filter(t => t.status === 'progress').length;
+
+        headerHtml = `
+          <div class="db-section-header">
+            <span class="db-section-subtitle">Project Manager Overview</span>
+            <h1 class="db-section-title">Milestones & Task Tracker</h1>
+          </div>
+        `;
+        cardsHtml = `
+          <div class="db-metric-card" onclick="showSection('pm-timeline')">
+            <div class="db-metric-icon" style="color: var(--primary); background: var(--primary-glow);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg></div>
+            <div class="db-metric-info">
+              <div class="db-metric-value">60%</div>
+              <div class="db-metric-label">Overall Completion</div>
+            </div>
+          </div>
+          <div class="db-metric-card" onclick="showSection('pm-kanban')">
+            <div class="db-metric-icon" style="color: #00E5FF; background: rgba(0, 229, 255, 0.08);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path></svg></div>
+            <div class="db-metric-info">
+              <div class="db-metric-value">${taskPercent}%</div>
+              <div class="db-metric-label">Task Completion Rate</div>
+            </div>
+          </div>
+          <div class="db-metric-card" onclick="showSection('pm-kanban')">
+            <div class="db-metric-icon" style="color: #00E676; background: rgba(0, 230, 118, 0.08);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+            <div class="db-metric-info">
+              <div class="db-metric-value">${inProgressTasks}</div>
+              <div class="db-metric-label">Tasks In Progress</div>
+            </div>
+          </div>
+        `;
+        panelsHtml = `
+          <div class="db-card">
+            <div class="db-card-header"><h3 class="db-card-title">Construction Phases Timeline</h3></div>
+            <div class="gantt-chart">
+              <div class="gantt-row">
+                <div class="gantt-label">Phase 1: Planning</div>
+                <div class="gantt-bar-wrapper"><div class="gantt-bar completed" style="width:100%"></div></div>
+              </div>
+              <div class="gantt-row">
+                <div class="gantt-label">Phase 2: Foundation</div>
+                <div class="gantt-bar-wrapper"><div class="gantt-bar completed" style="width:100%"></div></div>
+              </div>
+              <div class="gantt-row">
+                <div class="gantt-label">Phase 3: Framing</div>
+                <div class="gantt-bar-wrapper"><div class="gantt-bar" style="width:75%"></div></div>
+              </div>
+            </div>
+          </div>
+        `;
+
+      } else if (activeUser.role === 'Site Engineer') {
+        // Site Engineer Landing Dashboard Home
+        const reportsFiled = dailyReports.length;
+        const lowMaterials = materials.filter(m => m.qty < 50).length;
+
+        headerHtml = `
+          <div class="db-section-header">
+            <span class="db-section-subtitle">Site Engineer Overview</span>
+            <h1 class="db-section-title">Field Operations Control</h1>
+          </div>
+        `;
+        cardsHtml = `
+          <div class="db-metric-card" onclick="showSection('eng-inventory')">
+            <div class="db-metric-icon" style="color: var(--primary); background: var(--primary-glow);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg></div>
+            <div class="db-metric-info">
+              <div class="db-metric-value">${materials.length}</div>
+              <div class="db-metric-label">Tracked Materials</div>
+            </div>
+          </div>
+          <div class="db-metric-card" style="border-left: 3px solid ${lowMaterials > 0 ? '#FF5252' : 'var(--primary)'};" onclick="showSection('eng-inventory')">
+            <div class="db-metric-icon" style="color: ${lowMaterials > 0 ? '#FF5252' : '#00E5FF'}; background: ${lowMaterials > 0 ? 'rgba(255,82,82,0.08)' : 'rgba(0, 229, 255, 0.08)'};"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path></svg></div>
+            <div class="db-metric-info">
+              <div class="db-metric-value" style="color: ${lowMaterials > 0 ? '#FF5252' : 'inherit'};">${lowMaterials}</div>
+              <div class="db-metric-label">Low Stock Alerts</div>
+            </div>
+          </div>
+          <div class="db-metric-card" onclick="showSection('eng-reports')">
+            <div class="db-metric-icon" style="color: #00E676; background: rgba(0, 230, 118, 0.08);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg></div>
+            <div class="db-metric-info">
+              <div class="db-metric-value">${reportsFiled}</div>
+              <div class="db-metric-label">Daily Progress Logs Filed</div>
+            </div>
+          </div>
+        `;
+        panelsHtml = `
+          <div class="db-card">
+            <div class="db-card-header"><h3 class="db-card-title">Material Stock Levels</h3></div>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              ${materials.slice(0, 4).map(mat => `
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px;">
+                    <span>${mat.name}</span>
+                    <strong>${mat.qty} ${mat.unit}</strong>
+                  </div>
+                  <div class="gantt-bar-wrapper" style="height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px;">
+                    <div class="gantt-bar" style="width: ${Math.min(100, (mat.qty / 500) * 100)}%; height: 100%; border-radius: 4px; background: ${mat.qty < 50 ? '#FF5252' : 'var(--primary)'};"></div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+
+      } else if (activeUser.role === 'Client') {
+        // Client Landing Dashboard Home
+        const pendingInvs = invoices.filter(inv => inv.status === 'PENDING').length;
+        let pendingInvsCost = 0;
+        invoices.filter(inv => inv.status === 'PENDING').forEach(inv => pendingInvsCost += inv.cost);
+
+        headerHtml = `
+          <div class="db-section-header">
+            <span class="db-section-subtitle">Client Portal</span>
+            <h1 class="db-section-title">Welcome Back, ${activeUser.name}</h1>
+          </div>
+        `;
+        cardsHtml = `
+          <div class="db-metric-card" onclick="showSection('cli-overview')">
+            <div class="db-metric-icon" style="color: var(--primary); background: var(--primary-glow);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+            <div class="db-metric-info">
+              <div class="db-metric-value">60%</div>
+              <div class="db-metric-label">Project Completion</div>
+            </div>
+          </div>
+          <div class="db-metric-card" onclick="showSection('cli-payments')">
+            <div class="db-metric-icon" style="color: ${pendingInvs > 0 ? 'var(--primary)' : '#00E676'}; background: ${pendingInvs > 0 ? 'rgba(255,193,7,0.08)' : 'rgba(0,230,118,0.08)'};"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>
+            <div class="db-metric-info">
+              <div class="db-metric-value">${pendingInvs}</div>
+              <div class="db-metric-label">Unpaid Invoices</div>
+            </div>
+          </div>
+          <div class="db-metric-card" onclick="showSection('cli-payments')">
+            <div class="db-metric-icon" style="color: #00E5FF; background: rgba(0, 229, 255, 0.08);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+            <div class="db-metric-info">
+              <div class="db-metric-value">₹${(pendingInvsCost / 100000).toFixed(1)}L</div>
+              <div class="db-metric-label">Outstanding Balance</div>
+            </div>
+          </div>
+        `;
+        panelsHtml = `
+          <div class="db-card">
+            <div class="db-card-header"><h3 class="db-card-title">Construction Timeline Milestones</h3></div>
+            <div style="display:flex; flex-direction:column; gap:20px; position:relative; padding-left: 30px;">
+              <div style="position:absolute; left:7px; top:10px; bottom:10px; width:2px; background:var(--border-glass);"></div>
+              <div style="position:relative; display:flex; gap:16px;">
+                <div style="position:absolute; left:-30px; top:3px; width:16px; height:16px; border-radius:50%; background:#00E676; border:3px solid #0d0d0d; box-shadow:0 0 8px #00E676;"></div>
+                <div>
+                  <h4 style="font-size:14px; font-weight:600; color:#00E676;">Site Clearing & Planning - DONE</h4>
+                </div>
+              </div>
+              <div style="position:relative; display:flex; gap:16px;">
+                <div style="position:absolute; left:-30px; top:3px; width:16px; height:16px; border-radius:50%; background:#00E676; border:3px solid #0d0d0d; box-shadow:0 0 8px #00E676;"></div>
+                <div>
+                  <h4 style="font-size:14px; font-weight:600; color:#00E676;">Foundation Pouring - DONE</h4>
+                </div>
+              </div>
+              <div style="position:relative; display:flex; gap:16px;">
+                <div style="position:absolute; left:-30px; top:3px; width:16px; height:16px; border-radius:50%; background:var(--primary); border:3px solid #0d0d0d; box-shadow:0 0 8px var(--primary);"></div>
+                <div>
+                  <h4 style="font-size:14px; font-weight:600; color:var(--primary);">Steel Framing & Pillars - IN PROGRESS (75%)</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Render the complete layout HTML
+      homeSection.innerHTML = `
+        ${headerHtml}
+        
+        <!-- Metric Cards Grid -->
+        <div class="db-metrics-grid" style="margin-bottom: 30px;">
+          ${cardsHtml}
+        </div>
+
+        ${panelsHtml}
+      `;
+    }
+
+    // Setup active role layout modules
+    function buildDashboardModules() {
+      const menu = document.getElementById('sidebar-menu-links');
+      const main = document.getElementById('dashboard-main-content');
+
+      menu.innerHTML = '';
+      main.innerHTML = '';
+
+      if (activeUser.role === 'Admin') {
+        renderAdminDashboard(menu, main);
+      } else if (activeUser.role === 'Project Manager') {
+        renderPMDashboard(menu, main);
+      } else if (activeUser.role === 'Site Engineer') {
+        renderEngineerDashboard(menu, main);
+      } else if (activeUser.role === 'Client') {
+        renderClientDashboard(menu, main);
+      }
+
+      // Appending global settings elements
+      appendGlobalSettings(menu, main);
+
+      // Prepend Dashboard Home link button with showSection click behavior
+      const dashboardLink = document.createElement('button');
+      dashboardLink.setAttribute('onclick', "showSection('home')");
+      dashboardLink.className = 'db-menu-item';
+      dashboardLink.style.marginBottom = '8px';
+      dashboardLink.style.borderBottom = '1px solid var(--border-glass)';
+      dashboardLink.style.paddingBottom = '16px';
+      dashboardLink.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+        Dashboard Home
+      `;
+      menu.insertBefore(dashboardLink, menu.firstChild);
+
+      // Render Dashboard Home panel content
+      renderDashboardHome(main);
+
+      // Show initial dashboard panel
+      showSection('home');
+    }
+
+    // ==========================================================================
+    // RENDER: ADMIN DASHBOARD CONTROL PANEL
+    // ==========================================================================
+    function renderAdminDashboard(menu, main) {
+      // Sidebar links
+      menu.innerHTML = `
+        <button onclick="showSection('overview')" class="db-menu-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+          Overview Center
+        </button>
+        <button onclick="showSection('users')" class="db-menu-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          Manage Users
+        </button>
+        <button onclick="showSection('approvals')" class="db-menu-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          Quote Approvals
+        </button>
+      `;
+
+      // Main content panels HTML setup
+      main.innerHTML = `
+        <!-- SECTION 1: OVERVIEW -->
+        <div class="db-section active" id="sec-overview">
+          <div class="db-section-header">
+            <span class="db-section-subtitle">Admin Control Center</span>
+            <h1 class="db-section-title">Global Enterprise Overview</h1>
+          </div>
+
+          <div class="db-metrics-grid">
+            <div class="db-metric-card">
+              <div class="db-metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg></div>
+              <div class="db-metric-info">
+                <div class="db-metric-value" id="admin-val-projects">12</div>
+                <div class="db-metric-label">Active Sites</div>
+              </div>
+            </div>
+            <div class="db-metric-card">
+              <div class="db-metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+              <div class="db-metric-info">
+                <div class="db-metric-value" id="admin-val-clients">18</div>
+                <div class="db-metric-label">Total Users</div>
+              </div>
+            </div>
+            <div class="db-metric-card">
+              <div class="db-metric-icon" style="color: #00E676; background: rgba(0,230,118,0.08);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+              <div class="db-metric-info">
+                <div class="db-metric-value" id="admin-val-revenue">₹1.80Cr</div>
+                <div class="db-metric-label">Revenue Collected</div>
+              </div>
+            </div>
+            <div class="db-metric-card">
+              <div class="db-metric-icon" style="color: #FF5252; background: rgba(255,82,82,0.08);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div>
+              <div class="db-metric-info">
+                <div class="db-metric-value">0</div>
+                <div class="db-metric-label">Safety Incidents</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="db-card">
+            <div class="db-card-header"><h3 class="db-card-title">Live System Security & Activity Logs</h3></div>
+            <div class="log-feed" id="admin-log-container">
+              <!-- Logs Injected Here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: USERS MANAGER -->
+        <div class="db-section" id="sec-users">
+          <div class="db-section-header">
+            <span class="db-section-subtitle">Admin Operations</span>
+            <h1 class="db-section-title">User Account Registry</h1>
+          </div>
+          <div class="db-card">
+            <div class="table-responsive">
+              <table class="db-table">
+                <thead>
+                  <tr>
+                    <th>Full Name</th>
+                    <th>Email Address</th>
+                    <th>Designated Role</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-users-tbody">
+                  <!-- User Rows Injected Here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: APPROVALS -->
+        <div class="db-section" id="sec-approvals">
+          <div class="db-section-header">
+            <span class="db-section-subtitle">Client Requests</span>
+            <h1 class="db-section-title">Quote Approvals</h1>
+          </div>
+          <div class="db-card">
+            <div class="table-responsive">
+              <table class="db-table">
+                <thead>
+                  <tr>
+                    <th>Project Name</th>
+                    <th>Submitted By</th>
+                    <th>Details</th>
+                    <th>Cost Proposal</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-quotes-tbody">
+                  <!-- Quote rows injected here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Initial loading
+      refreshAdminOverview();
+      refreshAdminUsersTable();
+      refreshAdminQuotesTable();
+      seedSimulatedAdminLogs();
+    }
+
+    function refreshAdminOverview() {
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const invoices = JSON.parse(localStorage.getItem('invoices') || '[]');
+      const quotes = JSON.parse(localStorage.getItem('quotes') || '[]');
+
+      document.getElementById('admin-val-clients').textContent = users.length;
+      document.getElementById('admin-val-projects').textContent = quotes.filter(q => q.status === 'Approved').length + 2;
+
+      // Sum PAID invoices for revenue
+      let totalPaid = 0;
+      invoices.forEach(inv => {
+        if (inv.status === 'PAID') {
+          totalPaid += inv.cost;
+        }
+      });
+      document.getElementById('admin-val-revenue').textContent = '₹' + (totalPaid / 100000).toFixed(1) + 'L';
+    }
+
+    function seedSimulatedAdminLogs() {
+      const container = document.getElementById('admin-log-container');
+      if (!container) return;
+
+      const user = activeUser.name;
+      const logs = [
+        `[SECURITY] Administrator session initialized for ${user}`,
+        `[DATABASE] Loaded user database. Active user counts verified.`,
+        `[SYSTEM] Connected to local storage index cluster.`,
+        `[SYNC] Syncing materials stock registry with site locations.`,
+        `[MONITOR] Automated safety scanner status: GREEN`
+      ];
+
+      container.innerHTML = '';
+      logs.forEach(log => appendAdminLog(log));
+
+      // Auto update dummy log every 10 seconds
+      setInterval(() => {
+        const dummyActions = [
+          "[SYNC] Received materials level adjustment from Site 1",
+          "[MONITOR] Automated build backup saved to server",
+          "[SYNC] Remote server successfully pushed telemetry data",
+          "[SECURITY] User Priya PM viewed milestone layout tracking"
+        ];
+        const randomAction = dummyActions[Math.floor(Math.random() * dummyActions.length)];
+        appendAdminLog(randomAction);
+      }, 10000);
+    }
+
+    function appendAdminLog(text) {
+      const container = document.getElementById('admin-log-container');
+      if (!container) return;
+
+      const date = new Date().toLocaleTimeString();
+      const div = document.createElement('div');
+      div.className = 'log-item';
+      div.innerHTML = `<span class="log-timestamp">[${date}]</span> <span class="log-user">[SYS]</span> ${text}`;
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function refreshAdminUsersTable() {
+      const tbody = document.getElementById('admin-users-tbody');
+      if (!tbody) return;
+
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      tbody.innerHTML = '';
+
+      users.forEach((u, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="font-weight:600;">${u.name}</td>
+          <td>${u.email}</td>
+          <td><span class="badge-role ${u.role.replace(' ', '-')}">${u.role}</span></td>
+          <td>
+            <div class="action-buttons">
+              <button onclick="deleteUser(${index})" class="btn-action btn-delete" title="Delete User">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function deleteUser(index) {
+      let users = JSON.parse(localStorage.getItem('users') || '[]');
+      const targetUser = users[index];
+      
+      if (confirm(`Are you sure you want to remove user "${targetUser.name}"?`)) {
+        users.splice(index, 1);
+        localStorage.setItem('users', JSON.stringify(users));
+        refreshAdminUsersTable();
+        refreshAdminOverview();
+        appendAdminLog(`[ADMIN] Removed user account: ${targetUser.email}`);
+      }
+    }
+
+    function refreshAdminQuotesTable() {
+      const tbody = document.getElementById('admin-quotes-tbody');
+      if (!tbody) return;
+
+      const quotes = JSON.parse(localStorage.getItem('quotes') || '[]');
+      tbody.innerHTML = '';
+
+      quotes.forEach((q, index) => {
+        const tr = document.createElement('tr');
+        const statusClass = q.status.toLowerCase();
+
+        let actionsHtml = '';
+        if (q.status === 'Pending') {
+          actionsHtml = `
+            <div class="action-buttons">
+              <button onclick="approveQuote(${index})" class="btn-action btn-approve" title="Approve Project Quote">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </button>
+              <button onclick="rejectQuote(${index})" class="btn-action btn-reject" title="Reject Quote">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              </button>
+            </div>
+          `;
+        } else {
+          actionsHtml = `<span style="font-size:12px; color:var(--text-muted);">No action required</span>`;
+        }
+
+        tr.innerHTML = `
+          <td style="font-weight:600;">${q.project}</td>
+          <td>${q.client}</td>
+          <td style="max-width:240px; font-size:13px; color:var(--text-secondary); text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">${q.details}</td>
+          <td style="font-weight:700; color:var(--primary);">${q.cost}</td>
+          <td><span class="badge-status ${statusClass}">${q.status}</span></td>
+          <td>${actionsHtml}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function approveQuote(index) {
+      let quotes = JSON.parse(localStorage.getItem('quotes') || '[]');
+      quotes[index].status = 'Approved';
+      localStorage.setItem('quotes', JSON.stringify(quotes));
+      refreshAdminQuotesTable();
+      refreshAdminOverview();
+      appendAdminLog(`[PROJECT] Approved quote request: ${quotes[index].project} (Valued: ${quotes[index].cost})`);
+    }
+
+    function rejectQuote(index) {
+      let quotes = JSON.parse(localStorage.getItem('quotes') || '[]');
+      quotes[index].status = 'Rejected';
+      localStorage.setItem('quotes', JSON.stringify(quotes));
+      refreshAdminQuotesTable();
+      appendAdminLog(`[PROJECT] Rejected quote request: ${quotes[index].project}`);
+    }
+
+
+    // ==========================================================================
+    // RENDER: PROJECT MANAGER DASHBOARD
+    // ==========================================================================
+    function renderPMDashboard(menu, main) {
+      // Sidebar links
+      menu.innerHTML = `
+        <button onclick="showSection('pm-timeline')" class="db-menu-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Project Milestones
+        </button>
+        <button onclick="showSection('pm-kanban')" class="db-menu-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg>
+          Task Kanban Board
+        </button>
+      `;
+
+      // Main dashboard layout
+      main.innerHTML = `
+        <!-- SECTION 1: TIMELINE -->
+        <div class="db-section active" id="sec-pm-timeline">
+          <div class="db-section-header">
+            <span class="db-section-subtitle">PM Control Center</span>
+            <h1 class="db-section-title">Milestone Progress Tracking</h1>
+          </div>
+
+          <div class="db-metrics-grid">
+            <div class="db-metric-card">
+              <div class="db-metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 2 22 22 22"></polygon></svg></div>
+              <div class="db-metric-info">
+                <div class="db-metric-value">59%</div>
+                <div class="db-metric-label">Overall Completion</div>
+              </div>
+            </div>
+            <div class="db-metric-card">
+              <div class="db-metric-icon" style="color:#00E676; background:rgba(0,230,118,0.08);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></div>
+              <div class="db-metric-info">
+                <div class="db-metric-value">3 / 5</div>
+                <div class="db-metric-label">Milestones Done</div>
+              </div>
+            </div>
+            <div class="db-metric-card">
+              <div class="db-metric-icon" style="color:var(--primary); background:rgba(255,193,7,0.08);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></div>
+              <div class="db-metric-info">
+                <div class="db-metric-value">72%</div>
+                <div class="db-metric-label">Budget Consumption</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="db-card">
+            <div class="db-card-header"><h3 class="db-card-title">Construction Phases Timeline</h3></div>
+            <div class="gantt-chart">
+              <div class="gantt-row">
+                <div class="gantt-label">Phase 1: Planning</div>
+                <div class="gantt-bar-wrapper"><div class="gantt-bar completed" style="width:100%"></div></div>
+              </div>
+              <div class="gantt-row">
+                <div class="gantt-label">Phase 2: Foundation</div>
+                <div class="gantt-bar-wrapper"><div class="gantt-bar completed" style="width:100%"></div></div>
+              </div>
+              <div class="gantt-row">
+                <div class="gantt-label">Phase 3: Framing</div>
+                <div class="gantt-bar-wrapper"><div class="gantt-bar" style="width:75%"></div></div>
+              </div>
+              <div class="gantt-row">
+                <div class="gantt-label">Phase 4: Electrical & HVAC</div>
+                <div class="gantt-bar-wrapper"><div class="gantt-bar" style="width:20%"></div></div>
+              </div>
+              <div class="gantt-row">
+                <div class="gantt-label">Phase 5: Finishing</div>
+                <div class="gantt-bar-wrapper"><div class="gantt-bar" style="width:0%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: KANBAN -->
+        <div class="db-section" id="sec-pm-kanban">
+          <div class="db-section-header">
+            <span class="db-section-subtitle">Logistics & Scheduling</span>
+            <h1 class="db-section-title">Interactive Task Board</h1>
+          </div>
+
+          <!-- Add new task form panel inline -->
+          <div class="db-card" style="padding: 20px; margin-bottom: 24px;">
+            <h3 class="db-card-title" style="font-size: 15px; margin-bottom:14px; text-transform:uppercase; letter-spacing:0.05em;">Assign New Task</h3>
+            <form id="form-add-task" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) 120px; gap: 16px; align-items: flex-end;">
+              <div>
+                <label class="form-label" style="font-size:11px;">Task Title</label>
+                <input type="text" id="task-title" class="form-input" placeholder="e.g. Concrete safety review" style="padding: 10px 12px; font-size:13px;" required>
+              </div>
+              <div>
+                <label class="form-label" style="font-size:11px;">Category</label>
+                <select id="task-cat" class="form-input form-select" style="padding: 10px 12px; font-size:13px;" required>
+                  <option value="Planning">Planning</option>
+                  <option value="Foundation">Foundation</option>
+                  <option value="Framing">Framing</option>
+                  <option value="Electrical">Electrical</option>
+                  <option value="Finishing">Finishing</option>
+                </select>
+              </div>
+              <div>
+                <label class="form-label" style="font-size:11px;">Priority</label>
+                <select id="task-priority" class="form-input form-select" style="padding: 10px 12px; font-size:13px;" required>
+                  <option value="low">Low</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary" style="padding: 10px; font-size: 13px; height: 43px;">Add Task</button>
+            </form>
+          </div>
+
+          <div class="kanban-board">
+            <!-- TO DO -->
+            <div class="kanban-col">
+              <div class="kanban-col-header">
+                <span class="kanban-col-title"><span style="width:8px; height:8px; background:#FF5252; border-radius:50%;"></span>To Do</span>
+                <span class="kanban-col-count" id="count-todo">0</span>
+              </div>
+              <div class="kanban-col-cards" id="col-todo" style="display:flex; flex-direction:column; gap:12px;"></div>
+            </div>
+
+            <!-- IN PROGRESS -->
+            <div class="kanban-col">
+              <div class="kanban-col-header">
+                <span class="kanban-col-title"><span style="width:8px; height:8px; background:var(--primary); border-radius:50%;"></span>In Progress</span>
+                <span class="kanban-col-count" id="count-progress">0</span>
+              </div>
+              <div class="kanban-col-cards" id="col-progress" style="display:flex; flex-direction:column; gap:12px;"></div>
+            </div>
+
+            <!-- COMPLETED -->
+            <div class="kanban-col">
+              <div class="kanban-col-header">
+                <span class="kanban-col-title"><span style="width:8px; height:8px; background:#00E676; border-radius:50%;"></span>Completed</span>
+                <span class="kanban-col-count" id="count-completed">0</span>
+              </div>
+              <div class="kanban-col-cards" id="col-completed" style="display:flex; flex-direction:column; gap:12px;"></div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Render Tasks
+      refreshKanbanBoard();
+
+      // Hook up task creation form
+      const formTask = document.getElementById('form-add-task');
+      formTask.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const title = document.getElementById('task-title').value.trim();
+        const cat = document.getElementById('task-cat').value;
+        const priority = document.getElementById('task-priority').value;
+
+        if (!title) return;
+
+        let tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+        const newTask = {
+          id: 'T' + (tasks.length + 1),
+          title: title,
+          category: cat,
+          priority: priority,
+          status: 'todo'
+        };
+
+        tasks.push(newTask);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        
+        formTask.reset();
+        refreshKanbanBoard();
+      });
+    }
+
+    function refreshKanbanBoard() {
+      const todoCol = document.getElementById('col-todo');
+      const progressCol = document.getElementById('col-progress');
+      const completedCol = document.getElementById('col-completed');
+
+      if (!todoCol || !progressCol || !completedCol) return;
+
+      const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+
+      todoCol.innerHTML = '';
+      progressCol.innerHTML = '';
+      completedCol.innerHTML = '';
+
+      let todoCount = 0;
+      let progressCount = 0;
+      let completedCount = 0;
+
+      tasks.forEach((task, index) => {
+        const div = document.createElement('div');
+        div.className = `kanban-card priority-${task.priority}`;
+        
+        let actionButtons = '';
+        if (task.status === 'todo') {
+          actionButtons = `<button onclick="moveTask(${index}, 'progress')" class="btn-action" title="Start Task" style="width:24px; height:24px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg></button>`;
+        } else if (task.status === 'progress') {
+          actionButtons = `<button onclick="moveTask(${index}, 'completed')" class="btn-action" title="Complete Task" style="width:24px; height:24px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg></button>`;
+        } else {
+          actionButtons = `<span style="font-size:10px; color:#00E676; font-weight:600;">Success</span>`;
+        }
+
+        div.innerHTML = `
+          <div class="kanban-card-title">${task.title}</div>
+          <div class="kanban-card-meta">
+            <span class="kanban-card-tag">${task.category}</span>
+            <span style="text-transform:capitalize; font-weight:600; color: ${task.priority === 'high' ? '#FF5252' : task.priority === 'medium' ? 'var(--primary)' : '#00E676'};">${task.priority}</span>
+          </div>
+          <div class="kanban-card-actions">
+            <button onclick="deleteTask(${index})" class="btn-action" title="Delete Task" style="width:24px; height:24px; margin-right:auto;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path></svg></button>
+            ${actionButtons}
+          </div>
+        `;
+
+        if (task.status === 'todo') {
+          todoCol.appendChild(div);
+          todoCount++;
+        } else if (task.status === 'progress') {
+          progressCol.appendChild(div);
+          progressCount++;
+        } else if (task.status === 'completed') {
+          completedCol.appendChild(div);
+          completedCount++;
+        }
+      });
+
+      document.getElementById('count-todo').textContent = todoCount;
+      document.getElementById('count-progress').textContent = progressCount;
+      document.getElementById('count-completed').textContent = completedCount;
+    }
+
+    function moveTask(index, newStatus) {
+      let tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+      tasks[index].status = newStatus;
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      refreshKanbanBoard();
+    }
+
+    function deleteTask(index) {
+      let tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+      tasks.splice(index, 1);
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      refreshKanbanBoard();
+    }
+
+
+    // ==========================================================================
+    // RENDER: SITE ENGINEER DASHBOARD
+    // ==========================================================================
+    function renderEngineerDashboard(menu, main) {
+      menu.innerHTML = `
+        <button onclick="showSection('eng-inventory')" class="db-menu-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          Material Inventory
+        </button>
+        <button onclick="showSection('eng-reports')" class="db-menu-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          Daily Site Reports
+        </button>
+        <button onclick="showSection('eng-blueprint')" class="db-menu-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3h18v18H3z"></path><path d="M21 9H3M21 15H3M12 3v18"></path></svg>
+          Blueprint Viewer
+        </button>
+      `;
+
+      main.innerHTML = `
+        <!-- SECTION 1: INVENTORY -->
+        <div class="db-section active" id="sec-eng-inventory">
+          <div class="db-section-header">
+            <span class="db-section-subtitle">Field Logistics</span>
+            <h1 class="db-section-title">Site Material Inventory</h1>
+          </div>
+          <div class="db-card">
+            <div class="db-card-header"><h3 class="db-card-title">Active Stock Registry</h3></div>
+            <div class="table-responsive">
+              <table class="db-table">
+                <thead>
+                  <tr>
+                    <th>Material Description</th>
+                    <th>Current Quantity</th>
+                    <th>Adjust Quantity</th>
+                  </tr>
+                </thead>
+                <tbody id="eng-materials-tbody">
+                  <!-- Materials injected here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: REPORTS -->
+        <div class="db-section" id="sec-eng-reports">
+          <div class="db-section-header">
+            <span class="db-section-subtitle">Safety & Operations</span>
+            <h1 class="db-section-title">Daily Site Progress Log</h1>
+          </div>
+
+          <div class="db-two-col-grid">
+            <!-- Left Side: Form -->
+            <div class="db-card">
+              <div class="db-card-header"><h3 class="db-card-title">Submit Field Log</h3></div>
+              <form id="form-site-report">
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+                  <div class="form-group">
+                    <label class="form-label">Weather Conditions</label>
+                    <input type="text" id="rep-weather" class="form-input" placeholder="e.g. Sunny (36°C)" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Labor Headcount</label>
+                    <input type="number" id="rep-workers" class="form-input" placeholder="e.g. 28" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Operational Status</label>
+                  <select id="rep-status" class="form-input form-select" required>
+                    <option value="On Schedule">On Schedule</option>
+                    <option value="Delayed">Delayed</option>
+                    <option value="Halted">Safety Halt</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Daily Notes & Observations</label>
+                  <textarea id="rep-notes" class="form-input" rows="4" placeholder="Mention zones worked on, safety incidents, materials received..." style="resize:none;" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">File Report</button>
+              </form>
+            </div>
+
+            <!-- Right Side: History logs list -->
+            <div class="db-card">
+              <div class="db-card-header"><h3 class="db-card-title">Submitted Log History</h3></div>
+              <div class="log-history-list" id="eng-reports-history">
+                <!-- History reports cards injected here -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: BLUEPRINT VIEWER -->
+        <div class="db-section" id="sec-eng-blueprint">
+          <div class="db-section-header">
+            <span class="db-section-subtitle">BIM Model</span>
+            <h1 class="db-section-title">Structural Blueprint Interactive Viewer</h1>
+          </div>
+          <div class="db-card">
+            <div class="blueprint-select-wrapper">
+              <label class="form-label">Select Project Plan</label>
+              <select class="form-input form-select" onchange="loadBlueprintMockup(this.value)">
+                <option value="V1">Coimbatore Luxury Villa - Ground Level Plan</option>
+                <option value="V2">Salem Plaza Block B - Commercial Structural Grid</option>
+              </select>
+            </div>
+            
+            <div class="blueprint-container">
+              <div class="blueprint-grid-overlay"></div>
+              
+              <!-- Blueprint Interactive SVG -->
+              <svg class="blueprint-svg-display" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer Walls -->
+                <rect x="10" y="10" width="380" height="180" fill="none" stroke="#00E5FF" stroke-width="2.5" stroke-dasharray="2" />
+                
+                <!-- Zone A -->
+                <rect x="20" y="20" width="100" height="160" class="blueprint-interactive-zone completed" onclick="selectBlueprintZone('Zone A: Foundation Columns', 'Status: CASTING 100% DONE. Quality check completed.')" />
+                <text x="30" y="100" fill="#00E676" font-size="11" font-weight="bold" font-family="monospace">ZONE A</text>
+
+                <!-- Zone B -->
+                <rect x="130" y="20" width="140" height="160" class="blueprint-interactive-zone in-progress" onclick="selectBlueprintZone('Zone B: Steel Framing & Bracing', 'Status: ERECTION 75% COMPLETE. Site engineer monitoring alignment.')" />
+                <text x="170" y="100" fill="var(--primary)" font-size="11" font-weight="bold" font-family="monospace">ZONE B</text>
+
+                <!-- Zone C -->
+                <rect x="280" y="20" width="100" height="160" class="blueprint-interactive-zone" onclick="selectBlueprintZone('Zone C: Electrical Inlets & HVAC conduits', 'Status: PLANNED 20% COMPLETE. Waiting for masonry finish.')" />
+                <text x="290" y="100" fill="#00E5FF" font-size="11" font-weight="bold" font-family="monospace">ZONE C</text>
+              </svg>
+
+              <!-- Dynamic Details Overlay -->
+              <div class="blueprint-details-card">
+                <div class="blueprint-details-title" id="bp-zone-title">Select a Zone to Inspect Details</div>
+                <div id="bp-zone-status">Hover and click on the interactive zones (Zone A, B, or C) above to verify construction status specs.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Initial loads
+      refreshMaterialStockTable();
+      refreshDailyReportsHistory();
+
+      // Hook up site reports submission
+      const formReport = document.getElementById('form-site-report');
+      formReport.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const weather = document.getElementById('rep-weather').value.trim();
+        const workers = document.getElementById('rep-workers').value;
+        const status = document.getElementById('rep-status').value;
+        const notes = document.getElementById('rep-notes').value.trim();
+
+        if (!weather || !notes) return;
+
+        let reports = JSON.parse(localStorage.getItem('dailyReports') || '[]');
+        const today = new Date().toISOString().split('T')[0];
+
+        const newReport = {
+          id: 'R' + (reports.length + 1),
+          date: today,
+          weather: weather,
+          workers: parseInt(workers, 10),
+          status: status,
+          notes: notes
+        };
+
+        reports.unshift(newReport); // Add to beginning
+        localStorage.setItem('dailyReports', JSON.stringify(reports));
+
+        formReport.reset();
+        refreshDailyReportsHistory();
+      });
+    }
+
+    function refreshMaterialStockTable() {
+      const tbody = document.getElementById('eng-materials-tbody');
+      if (!tbody) return;
+
+      const materials = JSON.parse(localStorage.getItem('materials') || '[]');
+      tbody.innerHTML = '';
+
+      materials.forEach((mat, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="font-weight:600;">${mat.name}</td>
+          <td>
+            <div class="material-qty-cell">
+              <span class="material-qty-val" id="qty-val-${index}">${mat.qty} ${mat.unit}</span>
+            </div>
+          </td>
+          <td>
+            <div class="action-buttons">
+              <button onclick="adjustStock(${index}, -10)" class="material-adjust-btn" title="Decrease by 10">-10</button>
+              <button onclick="adjustStock(${index}, -1)" class="material-adjust-btn" title="Decrease by 1">-1</button>
+              <button onclick="adjustStock(${index}, 1)" class="material-adjust-btn" title="Increase by 1">+1</button>
+              <button onclick="adjustStock(${index}, 10)" class="material-adjust-btn" title="Increase by 10">+10</button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function adjustStock(index, delta) {
+      let materials = JSON.parse(localStorage.getItem('materials') || '[]');
+      materials[index].qty = Math.max(0, parseFloat((materials[index].qty + delta).toFixed(1)));
+      localStorage.setItem('materials', JSON.stringify(materials));
+      refreshMaterialStockTable();
+    }
+
+    function refreshDailyReportsHistory() {
+      const list = document.getElementById('eng-reports-history');
+      if (!list) return;
+
+      const reports = JSON.parse(localStorage.getItem('dailyReports') || '[]');
+      list.innerHTML = '';
+
+      reports.forEach(rep => {
+        const div = document.createElement('div');
+        div.className = 'log-history-card';
+        div.innerHTML = `
+          <div class="log-history-header">
+            <span class="log-history-date">${rep.date}</span>
+            <span class="badge-status ${rep.status.toLowerCase().replace(' ', '-')}">${rep.status}</span>
+          </div>
+          <div class="log-history-meta" style="margin-bottom:8px;">
+            <span>Weather: <strong>${rep.weather}</strong></span>
+            <span>Workers: <strong>${rep.workers}</strong></span>
+          </div>
+          <p class="log-history-text">${rep.notes}</p>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    function selectBlueprintZone(title, status) {
+      document.getElementById('bp-zone-title').textContent = title;
+      document.getElementById('bp-zone-status').textContent = status;
+    }
+
+    function loadBlueprintMockup(val) {
+      const zoneTitle = document.getElementById('bp-zone-title');
+      const zoneStatus = document.getElementById('bp-zone-status');
+
+      if (val === 'V2') {
+        zoneTitle.textContent = 'Commercial Structural Grid Loaded';
+        zoneStatus.textContent = 'Salem Plaza Block B schematic drawing online. Hover on grid zones to inspect engineering notes.';
+      } else {
+        zoneTitle.textContent = 'Select a Zone to Inspect Details';
+        zoneStatus.textContent = 'Hover and click on the interactive zones (Zone A, B, or C) above to verify construction status specs.';
+      }
+    }
+
+
+    // ==========================================================================
+    // RENDER: CLIENT PORTAL DASHBOARD
+    // ==========================================================================
+    function renderClientDashboard(menu, main) {
+      menu.innerHTML = `
+        <button onclick="showSection('cli-overview')" class="db-menu-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          My Project Progress
+        </button>
+        <button onclick="showSection('cli-payments')" class="db-menu-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+          Invoices & Payments
+        </button>
+        <button onclick="showSection('cli-quote-request')" class="db-menu-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          Request Quote
+        </button>
+        <button onclick="showSection('cli-support')" class="db-menu-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+          Support Chat
+        </button>
+      `;
+
+      main.innerHTML = `
+        <!-- SECTION 1: OVERVIEW & PROGRESS -->
+        <div class="db-section active" id="sec-cli-overview">
+          <div class="db-section-header">
+            <span class="db-section-subtitle">Client Dashboard</span>
+            <h1 class="db-section-title">Coimbatore Luxury Villa Progress</h1>
+          </div>
+
+          <div class="db-metrics-grid">
+            <div class="db-metric-card">
+              <div class="db-metric-icon" style="color:var(--primary); background:rgba(255,193,7,0.08);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 2 22 22 22"></polygon></svg></div>
+              <div class="db-metric-info">
+                <div class="db-metric-value">60%</div>
+                <div class="db-metric-label">Overall Progress</div>
+              </div>
+            </div>
+            <div class="db-metric-card">
+              <div class="db-metric-icon" style="color:#00E676; background:rgba(0,230,118,0.08);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div>
+              <div class="db-metric-info">
+                <div class="db-metric-value">Oct 2026</div>
+                <div class="db-metric-label">Estimated Delivery</div>
+              </div>
+            </div>
+            <div class="db-metric-card">
+              <div class="db-metric-icon" style="color:#00E5FF; background:rgba(0,229,255,0.08);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div>
+              <div class="db-metric-info">
+                <div class="db-metric-value">4</div>
+                <div class="db-metric-label">Documents Vault</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="db-card">
+            <div class="db-card-header"><h3 class="db-card-title">Construction Timeline Milestones</h3></div>
+            <div style="display:flex; flex-direction:column; gap:20px; position:relative; padding-left: 30px;">
+              <!-- Timeline vertical axis bar line -->
+              <div style="position:absolute; left:7px; top:10px; bottom:10px; width:2px; background:var(--border-glass);"></div>
+              
+              <!-- Step 1 -->
+              <div style="position:relative; display:flex; gap:16px;">
+                <div style="position:absolute; left:-30px; top:3px; width:16px; height:16px; border-radius:50%; background:#00E676; border:3px solid #0d0d0d; box-shadow:0 0 8px #00E676;"></div>
+                <div>
+                  <h4 style="font-size:14px; font-weight:600; color:#00E676;">Site Clearing & Planning - DONE</h4>
+                  <p style="font-size:12px; color:var(--text-secondary); margin-top:2px;">Geotechnical surveys completed, blueprint plan approvals filed.</p>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div style="position:relative; display:flex; gap:16px;">
+                <div style="position:absolute; left:-30px; top:3px; width:16px; height:16px; border-radius:50%; background:#00E676; border:3px solid #0d0d0d; box-shadow:0 0 8px #00E676;"></div>
+                <div>
+                  <h4 style="font-size:14px; font-weight:600; color:#00E676;">Foundation Pouring - DONE</h4>
+                  <p style="font-size:12px; color:var(--text-secondary); margin-top:2px;">Concrete sub-grade laying, underground conduit pipes laid.</p>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div style="position:relative; display:flex; gap:16px;">
+                <div style="position:absolute; left:-30px; top:3px; width:16px; height:16px; border-radius:50%; background:var(--primary); border:3px solid #0d0d0d; box-shadow:0 0 8px var(--primary);"></div>
+                <div>
+                  <h4 style="font-size:14px; font-weight:600; color:var(--primary);">Steel Framing & Pillars - IN PROGRESS (75%)</h4>
+                  <p style="font-size:12px; color:var(--text-secondary); margin-top:2px;">Structural pillars assembly and roof beams framing ongoing.</p>
+                </div>
+              </div>
+
+              <!-- Step 4 -->
+              <div style="position:relative; display:flex; gap:16px;">
+                <div style="position:absolute; left:-30px; top:3px; width:16px; height:16px; border-radius:50%; background:var(--bg-surface-light); border:3px solid #0d0d0d;"></div>
+                <div>
+                  <h4 style="font-size:14px; font-weight:600; color:var(--text-muted);">Electrical & Drywall Plaster - PLANNED</h4>
+                  <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Scheduled to begin after structural skeleton safety reviews.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: INVOICES & PAYMENTS -->
+        <div class="db-section" id="sec-cli-payments">
+          <div class="db-section-header">
+            <span class="db-section-subtitle">Financial Accounting</span>
+            <h1 class="db-section-title">Milestone Invoices</h1>
+          </div>
+          <div class="db-card">
+            <div class="db-card-header"><h3 class="db-card-title">Pending & Settled Invoices</h3></div>
+            <div id="client-invoices-list">
+              <!-- Invoice rows injected here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: REQUEST QUOTE -->
+        <div class="db-section" id="sec-cli-quote-request">
+          <div class="db-section-header">
+            <span class="db-section-subtitle">Expansion Proposals</span>
+            <h1 class="db-section-title">Request a Construction Proposal</h1>
+          </div>
+          
+          <div class="db-card" style="max-width: 600px;">
+            <div class="db-card-header"><h3 class="db-card-title">New Build Details</h3></div>
+            <form id="form-client-quote">
+              <div class="form-group">
+                <label class="form-label">Project Name / Reference</label>
+                <input type="text" id="cli-q-project" class="form-input" placeholder="e.g. Salem Villa Guest House Extension" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Project Details & Construction Requirements</label>
+                <textarea id="cli-q-details" class="form-input" rows="4" placeholder="Detail specifications, floor area, materials expectations, number of storeys..." style="resize:none;" required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Target Budget Allocation</label>
+                <input type="text" id="cli-q-budget" class="form-input" placeholder="e.g. ₹35,00,000" required>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Proposal Request</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- SECTION 4: SUPPORT CHAT -->
+        <div class="db-section" id="sec-cli-support">
+          <div class="db-section-header">
+            <span class="db-section-subtitle">Portal Assistance</span>
+            <h1 class="db-section-title">Live Chat support Desk</h1>
+          </div>
+          <div class="db-card" style="max-width:640px; padding:20px;">
+            <div class="chat-widget">
+              <div class="chat-header">
+                <div class="chat-status-dot"></div>
+                <div>
+                  <div class="chat-title">Stackly Support Center</div>
+                  <div class="chat-subtitle">Typically replies in under 1 minute</div>
+                </div>
+              </div>
+              <div class="chat-messages" id="chat-messages-container">
+                <div class="chat-bubble support">Hello! Welcome to the Stackly Client Portal workspace. If you have questions regarding your invoices, blueprint files, or timelines, please type here. Our team is online!</div>
+              </div>
+              
+              <!-- Typing simulator -->
+              <div class="chat-typing-indicator" id="chat-typing">
+                <div class="chat-dot"></div>
+                <div class="chat-dot"></div>
+                <div class="chat-dot"></div>
+              </div>
+
+              <form id="form-chat-send" class="chat-input-area">
+                <input type="text" id="chat-input-msg" class="chat-input" placeholder="Ask about timeline delays, invoice payment receipts..." required autocomplete="off">
+                <button type="submit" class="chat-send-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Load Client payments
+      refreshClientInvoices();
+
+      // Hook up Client Quote requests
+      const formClientQuote = document.getElementById('form-client-quote');
+      formClientQuote.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const project = document.getElementById('cli-q-project').value.trim();
+        const details = document.getElementById('cli-q-details').value.trim();
+        const budget = document.getElementById('cli-q-budget').value.trim();
+
+        if (!project || !details || !budget) return;
+
+        let quotes = JSON.parse(localStorage.getItem('quotes') || '[]');
+        const newQuote = {
+          id: 'Q' + (quotes.length + 1),
+          client: activeUser.name,
+          project: project,
+          details: details,
+          cost: budget,
+          status: 'Pending'
+        };
+
+        quotes.push(newQuote);
+        localStorage.setItem('quotes', JSON.stringify(quotes));
+
+        formClientQuote.reset();
+        alert('Quote request submitted successfully! It has been posted to Admin approvals.');
+        showSection('cli-overview');
+      });
+
+      // Hook up Support Chat submission
+      const formChat = document.getElementById('form-chat-send');
+      formChat.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const input = document.getElementById('chat-input-msg');
+        const text = input.value.trim();
+        if (!text) return;
+
+        // Append user bubble
+        appendChatBubble(text, 'user');
+        input.value = '';
+
+        // Display typing status
+        const typing = document.getElementById('chat-typing');
+        typing.style.display = 'flex';
+
+        const messagesContainer = document.getElementById('chat-messages-container');
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+        // Auto delay response simulation
+        setTimeout(() => {
+          typing.style.display = 'none';
+          
+          let responseText = "Thank you. We have recorded your query. A project manager will review this message shortly.";
+          if (chatMessageCounter < chatDialogueList.length) {
+            responseText = chatDialogueList[chatMessageCounter];
+            chatMessageCounter++;
+          }
+          appendChatBubble(responseText, 'support');
+        }, 1500);
+      });
+    }
+
+    function refreshClientInvoices() {
+      const list = document.getElementById('client-invoices-list');
+      if (!list) return;
+
+      const invoices = JSON.parse(localStorage.getItem('invoices') || '[]');
+      list.innerHTML = '';
+
+      invoices.forEach(inv => {
+        const div = document.createElement('div');
+        div.className = 'db-payment-row';
+
+        let actionHtml = '';
+        if (inv.status === 'PENDING') {
+          actionHtml = `<button onclick="openPayModal('${inv.id}', ${inv.cost})" class="btn btn-primary" style="padding: 10px 18px; font-size:13px;">Pay Now</button>`;
+        } else {
+          actionHtml = `<span class="badge-status approved">PAID</span>`;
+        }
+
+        div.innerHTML = `
+          <div class="db-payment-info">
+            <div class="db-payment-title">${inv.description}</div>
+            <div class="db-payment-meta">Invoice ref: <strong>#${inv.id}</strong> | Dated: ${inv.date}</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:20px;">
+            <div class="db-payment-amount">₹${inv.cost.toLocaleString('en-IN')}</div>
+            ${actionHtml}
+          </div>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    function appendChatBubble(text, sender) {
+      const container = document.getElementById('chat-messages-container');
+      if (!container) return;
+
+      const div = document.createElement('div');
+      div.className = `chat-bubble ${sender}`;
+      div.textContent = text;
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+    }
+
+
+    // ==========================================================================
+    // INITIALIZATION & MODAL FORMS HOOKS
+    // ==========================================================================
+    document.addEventListener('DOMContentLoaded', () => {
+      seedDashboardData();
+      checkAuth();
+      buildDashboardModules();
+
+      // Mobile sidebar hamburger toggle
+      const menuToggle = document.getElementById('menu-toggle');
+      const sidebar = document.querySelector('.db-sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          sidebar.classList.toggle('open');
+        });
+        
+        // Also close sidebar if user clicks outside of it on mobile
+        document.addEventListener('click', (e) => {
+          if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && e.target !== menuToggle && !menuToggle.contains(e.target)) {
+            sidebar.classList.remove('open');
+            menuToggle.classList.remove('open');
+            document.body.classList.remove('menu-open');
+          }
+        });
+      }
+
+      // Modal Payment Submission
+      const formPay = document.getElementById('form-pay-action');
+      formPay.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // 1. Show spinner screen
+        document.getElementById('pay-form-screen').style.display = 'none';
+        document.getElementById('pay-loading-screen').style.display = 'flex';
+
+        // 2. Timeout to succeed
+        setTimeout(() => {
+          // Update Invoice status to PAID in LocalStorage
+          let invoices = JSON.parse(localStorage.getItem('invoices') || '[]');
+          invoices.forEach(inv => {
+            if (inv.id === selectedActiveInvoiceId) {
+              inv.status = 'PAID';
+            }
+          });
+          localStorage.setItem('invoices', JSON.stringify(invoices));
+
+          // Render Success screen
+          document.getElementById('pay-loading-screen').style.display = 'none';
+          document.getElementById('pay-success-screen').style.display = 'flex';
+
+          const receiptId = 'Receipt ID: #ST-' + Math.floor(1000000 + Math.random() * 9000000);
+          document.getElementById('pay-success-id').textContent = receiptId;
+
+          // Re-render invoices
+          refreshClientInvoices();
+        }, 2500);
+      });
+    });
+  </script>
+</body>
+
+</html>

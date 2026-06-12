@@ -1,3 +1,8 @@
+// Immediate redirect check: if user is logged in, restrict access to public pages and lock them in dashboard
+if (localStorage.getItem('currentUser') && !window.location.pathname.endsWith('dashboard.html')) {
+  window.location.replace('dashboard.html');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
   /* --- LOADER SCREEN HANDLER --- */
@@ -642,5 +647,178 @@ document.addEventListener('DOMContentLoaded', () => {
       isCursorVisible = true;
     });
   }
+
+  /* --- AUTHENTICATION & PORTAL NAVIGATION MODIFICATIONS --- */
+  // 1. Seed default accounts database in localStorage if not exists
+  const seedUsersData = localStorage.getItem('users');
+  if (!seedUsersData) {
+    const seedUsers = [
+      { email: 'admin@stackly.com', password: 'admin123', name: 'Rajesh Kumar MD', role: 'Admin' },
+      { email: 'pm@stackly.com', password: 'pm123', name: 'Priya PM', role: 'Project Manager' },
+      { email: 'engineer@stackly.com', password: 'engineer123', name: 'Arun Site Engineer', role: 'Site Engineer' },
+      { email: 'client@stackly.com', password: 'client123', name: 'Karthik Client', role: 'Client' }
+    ];
+    localStorage.setItem('users', JSON.stringify(seedUsers));
+  }
+
+  // 2. Adjust navigation bar menu links based on login status
+  const currentUserSession = localStorage.getItem('currentUser');
+  const navMenu = document.querySelector('.nav-menu');
+  const mobMenu = document.getElementById('mobile-menu');
+
+  if (currentUserSession) {
+    const activeSession = JSON.parse(currentUserSession);
+
+    // Cleanup login buttons if present
+    const oldLoginBtn = document.getElementById('login-nav-btn');
+    if (oldLoginBtn) oldLoginBtn.remove();
+    const oldLoginMob = document.getElementById('login-mob-btn');
+    if (oldLoginMob) oldLoginMob.remove();
+
+    // Dynamic injection: add 'Dashboard' link as the FIRST item in navbar menu lists
+    if (navMenu && !navMenu.querySelector('a[href="dashboard.html"]')) {
+      const dbLink = document.createElement('a');
+      dbLink.href = 'dashboard.html';
+      dbLink.className = 'nav-link';
+      dbLink.textContent = 'Dashboard';
+      
+      // If we are currently on dashboard.html, highlight it
+      if (window.location.pathname.endsWith('dashboard.html')) {
+        dbLink.classList.add('active');
+        navMenu.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+      }
+      navMenu.insertBefore(dbLink, navMenu.firstChild);
+    }
+
+    if (mobMenu && !mobMenu.querySelector('a[href="dashboard.html"]')) {
+      const dbLinkMob = document.createElement('a');
+      dbLinkMob.href = 'dashboard.html';
+      dbLinkMob.className = 'nav-link';
+      dbLinkMob.textContent = 'Dashboard';
+      if (window.location.pathname.endsWith('dashboard.html')) {
+        dbLinkMob.classList.add('active');
+        mobMenu.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+      }
+      
+      // Insert at the very beginning of the mobile menu
+      mobMenu.insertBefore(dbLinkMob, mobMenu.firstChild);
+    }
+
+    // Dynamic injection: add 'Logout' button next to Get Quote in desktop header
+    const desktopQuoteBtn = document.querySelector('.nav-actions #quote-btn') || document.querySelector('.nav-actions .btn-primary');
+    if (desktopQuoteBtn) {
+      // Ensure Get Quote points to contact form, not 404
+      desktopQuoteBtn.href = 'contact.html';
+      desktopQuoteBtn.textContent = 'Get Quote';
+      
+      if (!document.getElementById('logout-nav-btn')) {
+        const logoutBtn = document.createElement('a');
+        logoutBtn.href = '#';
+        logoutBtn.id = 'logout-nav-btn';
+        logoutBtn.className = 'btn btn-secondary';
+        logoutBtn.style.marginLeft = '12px';
+        logoutBtn.style.padding = '10px 18px';
+        logoutBtn.textContent = 'Logout';
+        logoutBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          localStorage.removeItem('currentUser');
+          window.location.reload();
+        });
+        desktopQuoteBtn.parentNode.insertBefore(logoutBtn, desktopQuoteBtn.nextSibling);
+      }
+    }
+
+    // Dynamic injection: add 'Logout' to mobile overlay menu
+    if (mobMenu && !mobMenu.querySelector('#logout-mob-btn')) {
+      const mobileQuoteBtn = mobMenu.querySelector('.btn-primary');
+      if (mobileQuoteBtn) {
+        mobileQuoteBtn.href = 'contact.html';
+      }
+      
+      const logoutLinkMob = document.createElement('a');
+      logoutLinkMob.href = '#';
+      logoutLinkMob.id = 'logout-mob-btn';
+      logoutLinkMob.className = 'nav-link';
+      logoutLinkMob.style.color = '#FF5252';
+      logoutLinkMob.textContent = 'Logout';
+      logoutLinkMob.addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.removeItem('currentUser');
+        window.location.reload();
+      });
+      mobMenu.appendChild(logoutLinkMob);
+    }
+  } else {
+    // NOT logged in: remove any lingering logout buttons
+    const oldLogoutBtn = document.getElementById('logout-nav-btn');
+    if (oldLogoutBtn) oldLogoutBtn.remove();
+    const oldLogoutMob = document.getElementById('logout-mob-btn');
+    if (oldLogoutMob) oldLogoutMob.remove();
+
+    // Dynamic injection: add large 'Login' button next to Get Quote in desktop header
+    const desktopQuoteBtn = document.querySelector('.nav-actions #quote-btn') || document.querySelector('.nav-actions .btn-primary');
+    if (desktopQuoteBtn && !document.getElementById('login-nav-btn')) {
+      const loginBtn = document.createElement('a');
+      loginBtn.href = 'login.html';
+      loginBtn.id = 'login-nav-btn';
+      loginBtn.className = 'btn btn-primary';
+      loginBtn.style.marginRight = '12px';
+      loginBtn.style.padding = '10px 18px';
+      loginBtn.textContent = 'Login';
+      desktopQuoteBtn.parentNode.insertBefore(loginBtn, desktopQuoteBtn);
+    }
+
+    // Dynamic injection: add large 'Login' button to mobile overlay menu
+    if (mobMenu && !mobMenu.querySelector('#login-mob-btn')) {
+      const loginLinkMob = document.createElement('a');
+      loginLinkMob.href = 'login.html';
+      loginLinkMob.id = 'login-mob-btn';
+      loginLinkMob.className = 'btn btn-primary';
+      loginLinkMob.style.marginTop = '15px';
+      loginLinkMob.style.width = '80%';
+      loginLinkMob.style.maxWidth = '300px';
+      loginLinkMob.textContent = 'Login';
+      
+      const actionBtnMob = mobMenu.querySelector('.btn-primary');
+      if (actionBtnMob) {
+        mobMenu.insertBefore(loginLinkMob, actionBtnMob);
+        actionBtnMob.style.marginTop = '15px'; // Spacing between buttons
+      } else {
+        mobMenu.appendChild(loginLinkMob);
+      }
+    }
+  }
+
+  // 3. Intercept Quote and Proposal clicks for unauthenticated users
+  document.body.addEventListener('click', (e) => {
+    // Target any link pointing to contact.html or containing specific Quote texts
+    const targetLink = e.target.closest('a');
+    if (!targetLink) return;
+
+    const href = targetLink.getAttribute('href');
+    const text = targetLink.textContent.toLowerCase();
+    
+    // Check if it's a quote/proposal action
+    const isQuoteAction = 
+      (href && (href.endsWith('contact.html') || href.includes('contact.html'))) ||
+      text.includes('quote') || 
+      text.includes('proposal') ||
+      targetLink.id === 'quote-btn';
+
+    // Exclude if it's external, or logout button, or if user is on login/dashboard pages
+    if (!isQuoteAction) return;
+    if (window.location.pathname.endsWith('login.html') || window.location.pathname.endsWith('dashboard.html') || window.location.pathname.endsWith('contact.html')) return;
+
+    // Verify session
+    if (!localStorage.getItem('currentUser')) {
+      e.preventDefault();
+      // Store redirect target
+      const destination = href ? targetLink.href : 'contact.html';
+      sessionStorage.setItem('redirectAfterLogin', destination);
+      
+      // Redirect to login
+      window.location.href = 'login.html?login_required=true';
+    }
+  });
 
 });

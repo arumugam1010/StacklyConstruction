@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Sign in or register to access the Stackly Construction workspace portal. Track project progress, manage timelines, view invoices, and submit daily reports.">
+  <title>Portal Login | Stackly Construction</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Auth Specific Styles -->
+  <link rel="stylesheet" href="auth-dashboard.css">
+</head>
+
+<body>
+
+  <!-- ====================================
+       LOADER SCREEN
+       ==================================== -->
+  <div class="loader-wrapper" id="loader">
+    <div class="loader-container">
+      <div class="loader-ring" aria-hidden="true"></div>
+      <div class="loader-glow" aria-hidden="true"></div>
+      <svg class="loader-logo" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="loader-yellow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FFF066" />
+            <stop offset="100%" stop-color="#FFD600" />
+          </linearGradient>
+        </defs>
+        <g fill="url(#loader-yellow)">
+          <path
+            d="M 64,2 C 60,15 48,32 32,48 C 14,66 6,84 20,102 C 30,115 56,114 56,98 C 56,90 44,88 35,82 C 26,76 30,62 38,52 C 46,42 62,25 64,2 Z" />
+          <path
+            d="M 64,2 C 60,15 48,32 32,48 C 14,66 6,84 20,102 C 30,115 56,114 56,98 C 56,90 44,88 35,82 C 26,76 30,62 38,52 C 46,42 62,25 64,2 Z"
+            transform="rotate(180, 50, 80)" />
+        </g>
+      </svg>
+    </div>
+  </div>
+  <script>document.body.classList.add('menu-open');</script>
+
+  <!-- ====================================
+       HEADER / NAVBAR
+       ==================================== -->
+  <header class="header scrolled" id="header" role="banner">
+    <div class="container nav-container">
+      <a href="index.html" class="logo" aria-label="Stackly Homepage">
+        <img src="assets/stackly-logo.webp" alt="Stackly" class="logo-img" width="220" height="54">
+      </a>
+      <div class="nav-actions">
+        <button class="nav-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu"
+          aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="nav-overlay" id="mobile-menu" aria-hidden="true" role="dialog">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="projects.html" class="nav-link">Projects</a>
+    <a href="blog.html" class="nav-link">Blog</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="contact.html" class="btn btn-primary">Get Quote</a>
+  </div>
+
+  <!-- ====================================
+       MAIN LOGIN / REGISTER SECTION
+       ==================================== -->
+  <section class="auth-page">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1 class="auth-title">Workspace Portal</h1>
+        <p class="auth-subtitle">Manage project logistics, timelines, and approvals</p>
+      </div>
+
+      <!-- Tab Controls -->
+      <div class="auth-tabs">
+        <div class="auth-tab active" id="tab-login" onclick="switchTab('login')">Sign In</div>
+        <div class="auth-tab" id="tab-register" onclick="switchTab('register')">Register</div>
+      </div>
+
+      <!-- Notification banner for feedback -->
+      <div id="auth-alert"
+        style="display: none; padding: 12px; border-radius: 4px; font-size: 13px; margin-bottom: 20px; text-align: center; font-weight: 500;">
+      </div>
+
+      <!-- SIGN IN FORM -->
+      <div class="auth-form-panel active" id="panel-login">
+        <form id="form-login-action" novalidate>
+          <div class="form-group" data-field="login-email">
+            <label class="form-label" for="login-email">Email Address</label>
+            <input type="email" id="login-email" class="form-input" placeholder="e.g. pm@stackly.com" required>
+            <span class="form-error-msg" id="login-email-error">Please enter a valid email address.</span>
+          </div>
+
+          <div class="form-group" data-field="login-password">
+            <label class="form-label" for="login-password">Password</label>
+            <div class="form-input-icon-wrapper">
+              <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+              <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('login-password')">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </div>
+            <span class="form-error-msg" id="login-password-error">Password is required.</span>
+          </div>
+
+          <div class="form-group" data-field="login-role">
+            <label class="form-label" for="login-role">Login As (Role)</label>
+            <select id="login-role" class="form-input form-select" required>
+              <option value="" disabled selected>Select your portal role</option>
+              <option value="Admin">Admin (Control Center)</option>
+              <option value="Project Manager">Project Manager (Logistics)</option>
+              <option value="Site Engineer">Site Engineer (Field Operations)</option>
+              <option value="Client">Client (Invoices & Progress)</option>
+            </select>
+            <span class="form-error-msg" id="login-role-error">Please select your role.</span>
+          </div>
+
+          <div class="auth-btn-wrapper">
+            <button type="submit" class="btn btn-primary">Sign In</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div class="auth-form-panel" id="panel-register">
+        <form id="form-register-action" novalidate>
+          <div class="form-group" data-field="register-name">
+            <label class="form-label" for="register-name">Full Name</label>
+            <input type="text" id="register-name" class="form-input" placeholder="e.g. Your Name" required>
+            <span class="form-error-msg" id="register-name-error">Please enter your full name.</span>
+          </div>
+
+          <div class="form-group" data-field="register-email">
+            <label class="form-label" for="register-email">Email Address</label>
+            <input type="email" id="register-email" class="form-input" placeholder="e.g. test@gmail.com" required>
+            <span class="form-error-msg" id="register-email-error">Please enter a valid email address.</span>
+          </div>
+
+          <div class="form-group" data-field="register-role">
+            <label class="form-label" for="register-role">I Am A (Role)</label>
+            <select id="register-role" class="form-input form-select" required>
+              <option value="" disabled selected>Choose role type</option>
+              <option value="Admin">Admin</option>
+              <option value="Project Manager">Project Manager</option>
+              <option value="Site Engineer">Site Engineer</option>
+              <option value="Client">Client</option>
+            </select>
+            <span class="form-error-msg" id="register-role-error">Please select a role.</span>
+          </div>
+
+          <div class="form-group" data-field="register-password">
+            <label class="form-label" for="register-password">Password</label>
+            <div class="form-input-icon-wrapper">
+              <input type="password" id="register-password" class="form-input" placeholder="At least 6 characters"
+                required>
+              <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('register-password')">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </div>
+            <span class="form-error-msg" id="register-password-error">Password must be at least 6 characters.</span>
+          </div>
+
+          <div class="form-group" data-field="register-confirm">
+            <label class="form-label" for="register-confirm">Confirm Password</label>
+            <div class="form-input-icon-wrapper">
+              <input type="password" id="register-confirm" class="form-input" placeholder="Repeat password" required>
+              <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('register-confirm')">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </div>
+            <span class="form-error-msg" id="register-confirm-error">Passwords must match.</span>
+          </div>
+
+          <div class="auth-btn-wrapper">
+            <button type="submit" class="btn btn-primary">Register Account</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="auth-footer">
+        <p>Need support? Contact IT Admin at <a href="mailto:support@stackly.com">support@stackly.com</a></p>
+      </div>
+    </div>
+  </section>
+  <div class="custom-cursor-dot" id="custom-cursor-dot" aria-hidden="true"></div>
+  <div class="custom-cursor-outline" id="custom-cursor-outline" aria-hidden="true"></div>
+
+  <!-- Global scripts -->
+  <script src="script.js"></script>
+
+  <!-- Login/Register Local Script -->
+  <script>
+    // Tab switching logic
+    function switchTab(tab) {
+      document.getElementById('tab-login').classList.remove('active');
+      document.getElementById('tab-register').classList.remove('active');
+      document.getElementById('panel-login').classList.remove('active');
+      document.getElementById('panel-register').classList.remove('active');
+
+      document.getElementById('tab-' + tab).classList.add('active');
+      document.getElementById('panel-' + tab).classList.add('active');
+
+      // Change background image dynamically
+      const authPage = document.querySelector('.auth-page');
+      if (authPage) {
+        if (tab === 'login') {
+          authPage.classList.remove('bg-register');
+          authPage.classList.add('bg-login');
+        } else {
+          authPage.classList.remove('bg-login');
+          authPage.classList.add('bg-register');
+        }
+      }
+
+      // Clear alert messages
+      const alertBox = document.getElementById('auth-alert');
+      alertBox.style.display = 'none';
+    }
+
+    // Toggle password fields
+    function togglePasswordVisibility(fieldId) {
+      const field = document.getElementById(fieldId);
+      const button = field.nextElementSibling;
+      if (field.type === 'password') {
+        field.type = 'text';
+        button.style.color = 'var(--primary)';
+      } else {
+        field.type = 'password';
+        button.style.color = 'var(--text-muted)';
+      }
+    }
+
+    // Alert helper
+    function showAlert(message, type) {
+      const alertBox = document.getElementById('auth-alert');
+      alertBox.textContent = message;
+      alertBox.style.display = 'block';
+      if (type === 'success') {
+        alertBox.style.background = 'rgba(0, 230, 118, 0.08)';
+        alertBox.style.color = '#00E676';
+        alertBox.style.border = '1px solid rgba(0, 230, 118, 0.2)';
+      } else {
+        alertBox.style.background = 'rgba(255, 82, 82, 0.08)';
+        alertBox.style.color = '#FF5252';
+        alertBox.style.border = '1px solid rgba(255, 82, 82, 0.2)';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Ensure seed users database exists in localStorage
+      const usersData = localStorage.getItem('users');
+      let users = [];
+      if (usersData) {
+        users = JSON.parse(usersData);
+      } else {
+        // Seeding database with default users if empty
+        users = [
+          { email: 'admin@stackly.com', password: 'admin123', name: 'Rajesh Kumar MD', role: 'Admin' },
+          { email: 'pm@stackly.com', password: 'pm123', name: 'Priya PM', role: 'Project Manager' },
+          { email: 'engineer@stackly.com', password: 'engineer123', name: 'Arun Site Engineer', role: 'Site Engineer' },
+          { email: 'client@stackly.com', password: 'client123', name: 'Karthik Client', role: 'Client' }
+        ];
+        localStorage.setItem('users', JSON.stringify(users));
+      }
+
+      // Check URL parameters for registration messages
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('registered') === 'true') {
+        showAlert('Registration successful! Please sign in below.', 'success');
+      } else if (urlParams.get('login_required') === 'true') {
+        showAlert('Authentication required! Please login to get a quote.', 'error');
+      }
+
+      // LOGIN SUBMIT HANDLER
+      const formLogin = document.getElementById('form-login-action');
+      formLogin.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const emailInput = document.getElementById('login-email');
+        const passInput = document.getElementById('login-password');
+        const roleInput = document.getElementById('login-role');
+
+        let isValid = true;
+
+        // Reset errors
+        document.querySelectorAll('.form-group').forEach(grp => grp.classList.remove('has-error'));
+
+        // Validate fields
+        if (!emailInput.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
+          emailInput.closest('.form-group').classList.add('has-error');
+          isValid = false;
+        }
+        if (!passInput.value) {
+          passInput.closest('.form-group').classList.add('has-error');
+          isValid = false;
+        }
+        if (!roleInput.value) {
+          roleInput.closest('.form-group').classList.add('has-error');
+          isValid = false;
+        }
+
+        if (!isValid) return;
+
+        // Authenticate
+        const user = users.find(u => u.email.toLowerCase() === emailInput.value.trim().toLowerCase());
+
+        if (!user || user.password !== passInput.value) {
+          showAlert('Invalid email or password combination.', 'error');
+          return;
+        }
+
+        // Validate Role matches
+        if (user.role !== roleInput.value) {
+          showAlert(`Access denied! Registered user role is "${user.role}" but you selected "${roleInput.value}".`, 'error');
+          return;
+        }
+
+        // Store active session
+        localStorage.setItem('currentUser', JSON.stringify({
+          email: user.email,
+          name: user.name,
+          role: user.role
+        }));
+
+        showAlert('Sign in successful! Redirecting...', 'success');
+
+        // Check for redirect redirection
+        const redirect = sessionStorage.getItem('redirectAfterLogin');
+        sessionStorage.removeItem('redirectAfterLogin');
+
+        setTimeout(() => {
+          if (redirect) {
+            window.location.href = redirect;
+          } else {
+            window.location.href = 'dashboard.html';
+          }
+        }, 1200);
+      });
+
+      // REGISTER SUBMIT HANDLER
+      const formRegister = document.getElementById('form-register-action');
+      formRegister.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const nameInput = document.getElementById('register-name');
+        const emailInput = document.getElementById('register-email');
+        const roleInput = document.getElementById('register-role');
+        const passInput = document.getElementById('register-password');
+        const confirmInput = document.getElementById('register-confirm');
+
+        let isValid = true;
+        document.querySelectorAll('.form-group').forEach(grp => grp.classList.remove('has-error'));
+
+        // Validations
+        if (!nameInput.value.trim() || nameInput.value.trim().length < 2) {
+          nameInput.closest('.form-group').classList.add('has-error');
+          isValid = false;
+        }
+        if (!emailInput.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
+          emailInput.closest('.form-group').classList.add('has-error');
+          isValid = false;
+        }
+        if (!roleInput.value) {
+          roleInput.closest('.form-group').classList.add('has-error');
+          isValid = false;
+        }
+        if (!passInput.value || passInput.value.length < 6) {
+          passInput.closest('.form-group').classList.add('has-error');
+          isValid = false;
+        }
+        if (confirmInput.value !== passInput.value) {
+          confirmInput.closest('.form-group').classList.add('has-error');
+          isValid = false;
+        }
+
+        if (!isValid) return;
+
+        // Check if email already exists
+        const userExists = users.some(u => u.email.toLowerCase() === emailInput.value.trim().toLowerCase());
+        if (userExists) {
+          showAlert('This email address is already registered.', 'error');
+          return;
+        }
+
+        // Add user
+        const newUser = {
+          name: nameInput.value.trim(),
+          email: emailInput.value.trim(),
+          role: roleInput.value,
+          password: passInput.value
+        };
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+
+        // Display success and switch to login tab
+        switchTab('login');
+        showAlert('Registration successful! Please sign in with your new credentials.', 'success');
+        formRegister.reset();
+      });
+    });
+  </script>
+</body>
+
+</html>
